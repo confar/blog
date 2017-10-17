@@ -13,7 +13,7 @@
     
     
     
-    <title>categories | Блог о программировании и аналитике | и тут что-то</title>
+    <title>categories | Блог о программировании и аналитике | и не только</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
     <meta name="theme-color" content="#3F51B5">
@@ -146,7 +146,7 @@
             <a href="/" class="avatar waves-effect waves-circle waves-light"><img src="/blog/img/images.png"></a>
             <div class="content flex-col">
                 <p><strong>Confar</strong></p>
-                <p><em>и тут что-то</em></p>
+                <p><em>и не только</em></p>
                 <p>Программирую, интересуюсь веб-технологиями, анализом данных и машинным обучением</p>
             </div>
 
@@ -326,10 +326,10 @@ var BLOG = { ROOT: '/blog/', SHARE: true, REWARD: false };
     var OriginTitile = document.title, titleTime;
     document.addEventListener('visibilitychange', function() {
         if (document.hidden) {
-            document.title = '(~˘▾˘)~ ТУТ ТАКОЕE';
+            document.title = '(~˘▾˘)~ ТУТ ТАКОЕ';
             clearTimeout(titleTime);
         } else {
-            document.title = 'Показалось!!';
+            document.title = 'Показалось';
             titleTime = setTimeout(function() {
                 document.title = OriginTitile;
             },2000);

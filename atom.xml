@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>Блог о программировании и аналитике</title>
-  <subtitle>и тут что-то</subtitle>
+  <subtitle>и не только</subtitle>
   <link href="/blog/atom.xml" rel="self"/>
   
   <link href="http://confar.github.io/blog/"/>
-  <updated>2017-10-17T10:56:47.358Z</updated>
+  <updated>2017-10-17T18:27:34.776Z</updated>
   <id>http://confar.github.io/blog/</id>
   
   <author>
@@ -20,9 +20,23 @@
     <link href="http://confar.github.io/blog/2017/10/16/%D0%A0%D0%B0%D0%B7%D0%B1%D0%B8%D1%80%D0%B0%D0%B5%D0%BC%D1%81%D1%8F-c-Django/"/>
     <id>http://confar.github.io/blog/2017/10/16/Разбираемся-c-Django/</id>
     <published>2017-10-16T12:13:04.000Z</published>
-    <updated>2017-10-17T10:56:47.358Z</updated>
+    <updated>2017-10-17T18:27:34.776Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="Пишем-таск-менеджер-на-Django"><a href="#Пишем-таск-менеджер-на-Django" class="headerlink" title="Пишем таск менеджер на Django"></a>Пишем таск менеджер на Django</h1><p>  Начнем со страницы авторизации.</p>
+    <content type="html"><![CDATA[<h1 id="Пишем-таск-менеджер-на-Django"><a href="#Пишем-таск-менеджер-на-Django" class="headerlink" title="Пишем таск менеджер на Django"></a>Пишем таск менеджер на Django</h1><p>Начнем со страницы авторизации.</p>
+<h1 id="Создание-проекта"><a href="#Создание-проекта" class="headerlink" title="Создание проекта"></a>Создание проекта</h1><p>Для этого создадим проект myproject через консоль в нужной нам папке и перейдем в папку проекта. Внутри проекта создадим приложение джанго - registration</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ django-admin startproject myproject</div><div class="line">$ <span class="built_in">cd</span> myproject</div><div class="line">$ python manage.py startapp registration</div></pre></td></tr></table></figure>
+<p>теперь структура внутри registration выглядит следующим образом</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">│   admin.py</div><div class="line">│   apps.py</div><div class="line">│   models.py</div><div class="line">│   tests.py</div><div class="line">│   views.py</div><div class="line">│   __init__.py</div><div class="line">│</div><div class="line">└───migrations</div></pre></td></tr></table></figure>
+<h1 id="Пишем-вьюжки"><a href="#Пишем-вьюжки" class="headerlink" title="Пишем вьюжки"></a>Пишем вьюжки</h1><p>Всего у нас будет три страницы html, для тех, кто пришел в первый раз(login.html), для регистрации(register.html) и для тех, кто успешно прошел регистрацию и зашел через логин(success.html).</p>
+<p>Итого у нас два use-case</p>
+<ul>
+<li>для пришедших в первый раз: login -&gt; register -&gt; login -&gt; success</li>
+<li>для пришедших повторно login -&gt; success</li>
+</ul>
+<p>Обрабатывать результаты будем через формы и регистрационные данные записывать в базу данных sqlite3. Начнем.</p>
+<p>для обработки этих страниц в файле views.py пишем три функции на каждую из страниц</p>
+<p><a href="https://bootsnipp.com/snippets/featured/registration-form" target="_blank" rel="external">https://bootsnipp.com/snippets/featured/registration-form</a><br><a href="https://bootsnipp.com/snippets/featured/sign-in-panel" target="_blank" rel="external">https://bootsnipp.com/snippets/featured/sign-in-panel</a></p>
+<h1 id="Разбираемся-с-формами"><a href="#Разбираемся-с-формами" class="headerlink" title="Разбираемся с формами"></a>Разбираемся с формами</h1><p><a href="https://bootsnipp.com/snippets/featured/sign-in-panel" target="_blank" rel="external">https://bootsnipp.com/snippets/featured/sign-in-panel</a></p>
 ]]></content>
     
     <summary type="html">
@@ -107,16 +121,16 @@
     <link href="http://confar.github.io/blog/2017/10/07/hello-world/"/>
     <id>http://confar.github.io/blog/2017/10/07/hello-world/</id>
     <published>2017-10-07T18:23:17.467Z</published>
-    <updated>2017-10-17T09:17:06.736Z</updated>
+    <updated>2017-10-17T12:02:26.244Z</updated>
     
     <content type="html"><![CDATA[<p>Решил поднять сайт. Тут будут разные интересности про программирование и аналитику.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> this</div></pre></td></tr></table></figure>
+<script src="//gist.github.com/e1729db6e87fa95ef2d2c44c303e748f.js"></script>
 ]]></content>
     
     <summary type="html">
     
       &lt;p&gt;Решил поднять сайт. Тут будут разные интересности про программирование и аналитику.&lt;/p&gt;
-&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td c
+&lt;script src=&quot;//gist.github.com/e1729db6e87fa95ef2
     
     </summary>
     
