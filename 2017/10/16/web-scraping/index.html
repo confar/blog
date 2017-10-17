@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>Web Scraping | Блог о программировании и аналитике</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="python,scraping,pandas">
+    <meta name="description" content="Сегодня поговорим о веб скрапинге. Допустим, стоит задача выгрузить информацию с сайта или нескольких и представить ее в таблице. Для примера я возьму techcrunch и mashable. На выходе хочу получить та">
+<meta name="keywords" content="python,scraping,pandas">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Web Scraping">
+<meta property="og:url" content="http://confar.github.io/blog/2017/10/16/web-scraping/index.html">
+<meta property="og:site_name" content="Блог о программировании и аналитике">
+<meta property="og:description" content="Сегодня поговорим о веб скрапинге. Допустим, стоит задача выгрузить информацию с сайта или нескольких и представить ее в таблице. Для примера я возьму techcrunch и mashable. На выходе хочу получить та">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http://confar.github.io/blog/2017/10/16/web-scraping/block-content.png">
+<meta property="og:image" content="http://confar.github.io/blog/2017/10/16/web-scraping/result.png">
+<meta property="og:updated_time" content="2017-10-17T08:59:09.660Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Web Scraping">
+<meta name="twitter:description" content="Сегодня поговорим о веб скрапинге. Допустим, стоит задача выгрузить информацию с сайта или нескольких и представить ее в таблице. Для примера я возьму techcrunch и mashable. На выходе хочу получить та">
+<meta name="twitter:image" content="http://confar.github.io/blog/2017/10/16/web-scraping/block-content.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="Блог о программировании и аналитике" href="/blog/atom.xml">
+    
+    <link rel="shortcut icon" href="/blog/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/blog/img/brand.jpg)">
+      <div class="brand">
+        <a href="/blog/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/blog/img/images.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Confar</h5>
+          <a href="mailto:Программирую, интересуюсь анализом данных и машинным обучением" title="Программирую, интересуюсь анализом данных и машинным обучением" class="mail">Программирую, интересуюсь анализом данных и машинным обучением</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/blog/"  >
+                <i class="icon icon-lg icon-home"></i>
+                Главная
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/blog/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Все посты
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/blog/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Теги
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/confar" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/blog/about" target="_blank" >
+                <i class="icon icon-lg icon-info"></i>
+                Обо мне
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Web Scraping</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Поиск">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Web Scraping</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-10-16T11:35:12.000Z" itemprop="datePublished" class="page-time">
+  2017-10-16
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Библиотеки"><span class="post-toc-text">Библиотеки</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Нахождение-нужных-нам-элементов"><span class="post-toc-text">Нахождение нужных нам элементов</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Проделаем-тоже-самое-с-mashable"><span class="post-toc-text">Проделаем тоже самое с mashable</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Обработка-с-помощью-pandas"><span class="post-toc-text">Обработка с помощью pandas</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Открываем-таблицу"><span class="post-toc-text">Открываем таблицу</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Ссылки"><span class="post-toc-text">Ссылки</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-web-scraping"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Web Scraping</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017-10-16 14:35:12" datetime="2017-10-16T11:35:12.000Z"  itemprop="datePublished">2017-10-16</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>Сегодня поговорим о веб скрапинге. Допустим, стоит задача выгрузить информацию с сайта или нескольких и представить ее в таблице. Для примера я возьму techcrunch и mashable. На выходе хочу получить таблицу с колонками [текст], [краткое описание], [ссылка], чтобы не тратить время на бесконечное зависание на сайтах, ну вы знаете как это бывает=)</p>
+<h1 id="Библиотеки"><a href="#Библиотеки" class="headerlink" title="Библиотеки"></a>Библиотеки</h1><p>Начнем с импорта. Для работы с http лучший выбор это requests, а для парсинга html будем классически работать с Beautiful Soup. Ну и pandas для удобной работы с данными и выгрузки в csv.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> requests</div><div class="line"><span class="keyword">from</span> bs4 <span class="keyword">import</span> BeautifulSoup</div><div class="line"><span class="keyword">from</span> numpy <span class="keyword">import</span> nan <span class="keyword">as</span> NaN</div><div class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</div></pre></td></tr></table></figure>
+<h1 id="Нахождение-нужных-нам-элементов"><a href="#Нахождение-нужных-нам-элементов" class="headerlink" title="Нахождение нужных нам элементов"></a>Нахождение нужных нам элементов</h1><p>Напишем скрипт, выполняющий get-запрос, записав его в переменную, затем преобразуем полученный текст страницы в объект BeautifulSoup.<br>В качестве аргумента get-запроса передадим ссылку на раздел startups, там все веселье.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">r1 = requests.get(<span class="string">'https://techcrunch.com/startups/'</span>)</div><div class="line">soup = BeautifulSoup(r1.text, <span class="string">'html.parser'</span>)</div></pre></td></tr></table></figure>
+<p>Здесь мы получим на выходе кусок html, который выглядит примерно так(для примера приведен только отрывок). Действительно суп=)</p>
+<pre><code>&lt;ul class=&quot;subnav-channel&quot; data-omni-sm-delegate=&quot;gbl_mainnav&quot;&gt;&lt;li class=&quot;menu-item menu-item-type-taxonomy menu-item-object-category current-menu-item menu-item-899745&quot; id=&quot;menu-item-899745&quot;&gt;&lt;a href=&quot;https://techcrunch.com/startups/&quot;&gt;Startups&lt;/a&gt;&lt;/li&gt;
+&lt;li class=&quot;menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-899746&quot; id=&quot;menu-item-899746&quot;&gt;&lt;a href=&quot;https://techcrunch.com/mobile/&quot;&gt;Mobile&lt;/a&gt;&lt;/li&gt;
+&lt;li class=&quot;menu-item menu-item-type-taxonomy menu-item-object-category menu-item-899747&quot; id=&quot;menu-item-899747&quot;&gt;&lt;a href=&quot;https://techcrunch.com/gadgets/&quot;&gt;Gadgets&lt;/a&gt;&lt;/li&gt;
+&lt;li class=&quot;menu-item menu-item-type-taxonomy menu-item-object-category menu-item-899748&quot; id=&quot;menu-item-899748&quot;&gt;&lt;a href=&quot;https://techcrunch.com/enterprise/&quot;&gt;Enterprise&lt;/a&gt;&lt;/li&gt;
+&lt;li class=&quot;menu-item menu-item-type-taxonomy menu-item-object-category menu-item-899749&quot; id=&quot;menu-item-899749&quot;&gt;&lt;a href=&quot;https://techcrunch.com/social/&quot;&gt;Social&lt;/a&gt;&lt;/li&gt;
+&lt;li class=&quot;menu-item menu-item-type-taxonomy menu-item-object-category menu-item-899750&quot; id=&quot;menu-item-899750&quot;&gt;&lt;a href=&quot;https://techcrunch.com/europe/&quot;&gt;Europe&lt;/a&gt;&lt;/li&gt;
+&lt;li class=&quot;menu-item menu-item-type-custom menu-item-object-custom menu-item-901944&quot; id=&quot;menu-item-901944&quot;&gt;&lt;a href=&quot;/asia&quot;&gt;Asia&lt;/a&gt;&lt;/li&gt;
+</code></pre><p>Открываем нашу ссылку в браузере через f12 и находим нужные нам элементы - тег с названием(будем искать по title), описанием(description) и url.</p>
+<p>В случае с techcrunch все нужные нам ссылки находятся в “диве” block-content, в котором находится каждый пост.</p>
+<img src="/blog/2017/10/16/web-scraping/block-content.png" alt="block-content" title="block-content">
+<p>Для подобного сценария в BS есть команда find<em>all(), которая находит </em>все_ возможные вхождения тега с заданными параметрами.<br>Затем мы создаем простой for луп и пустой список, куда записываем нужные нам данные, которые также ищем по тегам внутри block-content.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">resultstech = soup.find_all(<span class="string">'div'</span>, <span class="string">'block-content'</span>,)</div><div class="line">recordstech = []</div><div class="line"><span class="keyword">for</span> result <span class="keyword">in</span> resultstech:</div><div class="line">    title = result.find(<span class="string">'h2'</span>).text.strip()</div><div class="line">    desc = result.find(<span class="string">'p'</span>, <span class="string">'excerpt'</span>).text[:<span class="number">-10</span>].strip()</div><div class="line">    link = result.find(<span class="string">'a'</span>)[<span class="string">'href'</span>]</div><div class="line">    recordstech.append((title, desc, link))</div></pre></td></tr></table></figure>
+<p>Для удобства обрезаем пробелы с помощью метода strip(), и последние десять символов в desc, обратившись к ним по индексу[:-10], т.к. они представляют собой фразу “Read More” для каждого поста.</p>
+<p>На выходе мы получили список из кортежей, где находятся наши данные.</p>
+<h2 id="Проделаем-тоже-самое-с-mashable"><a href="#Проделаем-тоже-самое-с-mashable" class="headerlink" title="Проделаем тоже самое с mashable"></a>Проделаем тоже самое с mashable</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">r2 = requests.get(<span class="string">'http://mashable.com/tech/'</span>)</div><div class="line">soup = BeautifulSoup(r2.text, <span class="string">'html.parser'</span>)</div><div class="line"></div><div class="line">resultsmash = soup.find_all(<span class="string">'article'</span>)</div><div class="line">recordsmash = []</div><div class="line"><span class="keyword">for</span> result <span class="keyword">in</span> resultsmash:</div><div class="line">    title = result.find(<span class="string">'h1'</span>).text</div><div class="line">    link = result.find(<span class="string">'a'</span>)[<span class="string">'href'</span>]</div><div class="line">    recordsmash.append((title, link))</div></pre></td></tr></table></figure>
+<p>Тут не всегда есть подробные описания, поэтому мы остановимся на названии и ссылке.</p>
+<h1 id="Обработка-с-помощью-pandas"><a href="#Обработка-с-помощью-pandas" class="headerlink" title="Обработка с помощью pandas"></a>Обработка с помощью pandas</h1><p>Создадим два датафрейма пандас для того, чтобы красиво соединить наши данные. Для визуального разделения данных сделаем пустой ряд - empty row с помощью вставки not a number - “NaN” из numpy, после каждого набора данных.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">dftech = pd.DataFrame(recordstech, columns=[<span class="string">'title'</span>, <span class="string">'desc'</span>, <span class="string">'link'</span>])</div><div class="line">empty_row3 = pd.Series([NaN, NaN, NaN], index=[<span class="string">'title'</span>, <span class="string">'desc'</span>, <span class="string">'link'</span>])</div><div class="line">dftech_empty_row = dftech.append(empty_row3, ignore_index=<span class="keyword">True</span>)</div><div class="line"></div><div class="line">dfmash = pd.DataFrame(recordsmash, columns=[<span class="string">'title'</span>, <span class="string">'link'</span>])</div><div class="line">empty_row2 = pd.Series([NaN, NaN], index=[<span class="string">'title'</span>, <span class="string">'link'</span>])</div><div class="line">dfmash_empty_row = dfmash.append(empty_row2, ignore_index=<span class="keyword">True</span>)</div></pre></td></tr></table></figure>
+<p>После этого соединим наши датафреймы с помощью метода concat()</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">frames = [dfvc_empty_row, dfmash_empty_row, dftech_empty_row]</div><div class="line">results = pd.concat(frames)</div></pre></td></tr></table></figure>
+<h1 id="Открываем-таблицу"><a href="#Открываем-таблицу" class="headerlink" title="Открываем таблицу"></a>Открываем таблицу</h1><p>Запишем результаты в csv</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">results.to_csv(<span class="string">'parsing.csv'</span>), index=<span class="keyword">False</span>, encoding=<span class="string">'utf-8'</span>)</div></pre></td></tr></table></figure>
+<ul>
+<li>откроем csv файл с помощью текстового редактора и зададим разделение sep=, в самом начале  если нужно открыть в экселе</li>
+<li>либо откроем в google sheets</li>
+</ul>
+<p>Картинка ниже как именно выглядит результат</p>
+<img src="/blog/2017/10/16/web-scraping/result.png" alt="result" title="result">
+<p>Готово. Можете применить подобную операцию ко всем сайтам в интересной вам индустрии, и на выходе получить сводку всех новостей в одном таблице, определив что вам полезно, а что нет. И не тратить время на бесконечный скроллинг веба=)</p>
+<blockquote>
+<p>Предварительно ознакомьтесь с правилами сайта, для этого прибавьте к корневому url адресу /robots.txt и узнайте, можно ли его “скрейпить”.</p>
+</blockquote>
+<p>Некоторые сайты предоставляют отдельное api для скрейпинга, но об этом уже в другой раз.</p>
+<h1 id="Ссылки"><a href="#Ссылки" class="headerlink" title="Ссылки"></a>Ссылки</h1><ul>
+<li><a href="https://github.com/confar/web-parsing-tech-news" target="_blank" rel="external">Полный код можно найти в моем репозитории на github</a></li>
+<li><a href="https://www.crummy.com/software/BeautifulSoup/bs4/doc/" target="_blank" rel="external">Документация BeautifulSoup</a></li>
+<li><a href="http://pbpython.com/web-scraping-mn-budget.html" target="_blank" rel="external">Классная статья о скрейпинге общественных ресурсов</a></li>
+</ul>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    Обновлено: <time datetime="2017-10-17T08:59:09.660Z" itemprop="dateUpdated">2017-10-17 11:59:09</time>
+</span><br>
+
+
+        
+        Прямая ссылка на пост <a href="/blog/2017/10/16/web-scraping/" target="_blank" rel="external">http://confar.github.io/blog/2017/10/16/web-scraping/</a>
+        
+    </div>
+    <footer>
+        <a href="http://confar.github.io/blog">
+            <img src="/blog/img/images.png" alt="Confar">
+            Confar
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/pandas/">pandas</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/python/">python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/scraping/">scraping</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+     <!--  <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://confar.github.io/blog/2017/10/16/web-scraping/&title=《Web Scraping》 — Блог о программировании и аналитике&pic=http://confar.github.io/blog/img/images.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://confar.github.io/blog/2017/10/16/web-scraping/&title=《Web Scraping》 — Блог о программировании и аналитике&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li> -->
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://confar.github.io/blog/2017/10/16/web-scraping/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Web Scraping》 — Блог о программировании и аналитике&url=http://confar.github.io/blog/2017/10/16/web-scraping/&via=http://confar.github.io/blog" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://confar.github.io/blog/2017/10/16/web-scraping/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/blog/2017/10/16/Разбираемся-c-Django/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Пишем таск менеджер на Django</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/blog/2017/10/07/hello-world/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Hello World</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+<!-- 
+ -->
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+
+</p>
+
+
+
+    </div>
+    <div class="bottom">
+        
+                <p><span><a href="/blog/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+        <span>Confar &copy; 2017</span>
+
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+     <!--  <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://confar.github.io/blog/2017/10/16/web-scraping/&title=《Web Scraping》 — Блог о программировании и аналитике&pic=http://confar.github.io/blog/img/images.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://confar.github.io/blog/2017/10/16/web-scraping/&title=《Web Scraping》 — Блог о программировании и аналитике&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li> -->
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://confar.github.io/blog/2017/10/16/web-scraping/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Web Scraping》 — Блог о программировании и аналитике&url=http://confar.github.io/blog/2017/10/16/web-scraping/&via=http://confar.github.io/blog" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://confar.github.io/blog/2017/10/16/web-scraping/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://confar.github.io/blog/2017/10/16/web-scraping/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/blog/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '(~˘▾˘)~ ТУТ ТАКОЕE';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'Показалось!!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
