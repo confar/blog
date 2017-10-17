@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>Блог о программировании и аналитике</title>
-  <subtitle>и не только</subtitle>
+  
   <link href="/blog/atom.xml" rel="self"/>
   
   <link href="http://confar.github.io/blog/"/>
@@ -121,16 +121,16 @@
     <link href="http://confar.github.io/blog/2017/10/07/hello-world/"/>
     <id>http://confar.github.io/blog/2017/10/07/hello-world/</id>
     <published>2017-10-07T18:23:17.467Z</published>
-    <updated>2017-10-17T12:02:26.244Z</updated>
+    <updated>2017-10-17T19:32:10.014Z</updated>
     
-    <content type="html"><![CDATA[<p>Решил поднять сайт. Тут будут разные интересности про программирование и аналитику.</p>
+    <content type="html"><![CDATA[<p>Решил поднять сайт. Тут будут различные заметки про программирование и аналитику.</p>
 <script src="//gist.github.com/e1729db6e87fa95ef2d2c44c303e748f.js"></script>
 ]]></content>
     
     <summary type="html">
     
-      &lt;p&gt;Решил поднять сайт. Тут будут разные интересности про программирование и аналитику.&lt;/p&gt;
-&lt;script src=&quot;//gist.github.com/e1729db6e87fa95ef2
+      &lt;p&gt;Решил поднять сайт. Тут будут различные заметки про программирование и аналитику.&lt;/p&gt;
+&lt;script src=&quot;//gist.github.com/e1729db6e87fa95ef2d2
     
     </summary>
     
