@@ -20,18 +20,18 @@
     
     
     <meta name="keywords" content="python,Django,web,bootstrap">
-    <meta name="description" content="В этой части будем реализовывать механизм авторизации пользователей через страницы логина и регистрации. Создание проектаДля начала создадим проект myproject через консоль в нужной нам папке и перейде">
+    <meta name="description" content="В этой части будем реализовывать механизм авторизации пользователей через страницы логина и регистрации на Django 1.11 c валидацией форм и возможностью logout. В статье приведен код для python3. Созда">
 <meta name="keywords" content="python,Django,web,bootstrap">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Пишем веб-приложение на Django">
 <meta property="og:url" content="http://confar.github.io/blog/2017/10/16/django-auth-app/index.html">
 <meta property="og:site_name" content="Блог о программировании и аналитике">
-<meta property="og:description" content="В этой части будем реализовывать механизм авторизации пользователей через страницы логина и регистрации. Создание проектаДля начала создадим проект myproject через консоль в нужной нам папке и перейде">
+<meta property="og:description" content="В этой части будем реализовывать механизм авторизации пользователей через страницы логина и регистрации на Django 1.11 c валидацией форм и возможностью logout. В статье приведен код для python3. Созда">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2017-10-20T16:10:53.462Z">
+<meta property="og:updated_time" content="2017-10-20T17:21:02.432Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Пишем веб-приложение на Django">
-<meta name="twitter:description" content="В этой части будем реализовывать механизм авторизации пользователей через страницы логина и регистрации. Создание проектаДля начала создадим проект myproject через консоль в нужной нам папке и перейде">
+<meta name="twitter:description" content="В этой части будем реализовывать механизм авторизации пользователей через страницы логина и регистрации на Django 1.11 c валидацией форм и возможностью logout. В статье приведен код для python3. Созда">
     
         <link rel="alternate" type="application/atom+xml" title="Блог о программировании и аналитике" href="/blog/atom.xml">
     
@@ -59,7 +59,7 @@
         </a>
         <hgroup class="introduce">
           <h5 class="nickname">Confar</h5>
-          <a href="mailto:Программирую, интересуюсь анализом данных и машинным обучением" title="Программирую, интересуюсь анализом данных и машинным обучением" class="mail">Программирую, интересуюсь анализом данных и машинным обучением</a>
+          <a href="mailto:Программирую, интересуюсь веб-технологиями, анализом данных и машинным обучением" title="Программирую, интересуюсь веб-технологиями, анализом данных и машинным обучением" class="mail">Программирую, интересуюсь веб-технологиями, анализом данных и машинным обучением</a>
         </hgroup>
       </div>
     </div>
@@ -174,7 +174,7 @@
 
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
-            <p>В этой части будем реализовывать механизм авторизации пользователей через страницы логина и регистрации.</p>
+            <p>В этой части будем реализовывать механизм авторизации пользователей через страницы логина и регистрации на Django 1.11 c валидацией форм и возможностью logout. В статье приведен код для python3.</p>
 <h1 id="Создание-проекта"><a href="#Создание-проекта" class="headerlink" title="Создание проекта"></a>Создание проекта</h1><p>Для начала создадим проект myproject через консоль в нужной нам папке и перейдем в папку проекта. Внутри проекта создадим приложение джанго - registration</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ django-admin startproject myproject</div><div class="line">$ <span class="built_in">cd</span> myproject</div><div class="line">$ python manage.py startapp registration</div></pre></td></tr></table></figure>
 <p>теперь структура внутри registration выглядит следующим образом</p>
@@ -226,7 +226,7 @@
     <div class="content">
         
 <span class="post-time">
-    Обновлено: <time datetime="2017-10-20T16:10:53.462Z" itemprop="dateUpdated">2017-10-20 19:10:53</time>
+    Обновлено: <time datetime="2017-10-20T17:21:02.432Z" itemprop="dateUpdated">2017-10-20 20:21:02</time>
 </span><br>
 
 
