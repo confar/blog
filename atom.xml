@@ -5,7 +5,7 @@
   <link href="/blog/atom.xml" rel="self"/>
   
   <link href="http://confar.github.io/blog/"/>
-  <updated>2017-10-20T15:46:47.005Z</updated>
+  <updated>2017-10-20T15:50:58.654Z</updated>
   <id>http://confar.github.io/blog/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://confar.github.io/blog/2017/10/16/%D0%9F%D0%B8%D1%88%D0%B5%D0%BC-%D0%B2%D0%B5%D0%B1-%D0%BF%D1%80%D0%B8%D0%BB%D0%BE%D0%B6%D0%B5%D0%BD%D0%B8%D0%B5-%D0%BD%D0%B0-Django/"/>
     <id>http://confar.github.io/blog/2017/10/16/Пишем-веб-приложение-на-Django/</id>
     <published>2017-10-16T12:13:04.000Z</published>
-    <updated>2017-10-20T15:46:47.005Z</updated>
+    <updated>2017-10-20T15:50:58.654Z</updated>
     
     <content type="html"><![CDATA[<p>В этой части будем реализовывать механизм авторизации пользователей через страницы логина и регистрации.</p>
 <h1 id="Создание-проекта"><a href="#Создание-проекта" class="headerlink" title="Создание проекта"></a>Создание проекта</h1><p>Для начала создадим проект myproject через консоль в нужной нам папке и перейдем в папку проекта. Внутри проекта создадим приложение джанго - registration</p>
@@ -83,14 +83,16 @@
     
       <category term="web" scheme="http://confar.github.io/blog/tags/web/"/>
     
+      <category term="bootstrap" scheme="http://confar.github.io/blog/tags/bootstrap/"/>
+    
   </entry>
   
   <entry>
-    <title>Web Scraping Beautiful Soup</title>
+    <title>Web Scraping средствами Beautiful Soup</title>
     <link href="http://confar.github.io/blog/2017/10/16/web-scraping/"/>
     <id>http://confar.github.io/blog/2017/10/16/web-scraping/</id>
     <published>2017-10-16T11:35:12.000Z</published>
-    <updated>2017-10-19T12:50:37.159Z</updated>
+    <updated>2017-10-20T15:50:16.942Z</updated>
     
     <content type="html"><![CDATA[<p>Сегодня поговорим о веб скрапинге. Допустим, стоит задача выгрузить информацию с сайта или нескольких и представить ее в таблице. Для примера я возьму techcrunch и mashable. На выходе хочу получить таблицу с колонками [текст], [краткое описание], [ссылка], чтобы не тратить время на бесконечное зависание на сайтах, ну вы знаете как это бывает=)</p>
 <h1 id="Библиотеки"><a href="#Библиотеки" class="headerlink" title="Библиотеки"></a>Библиотеки</h1><p>Начнем с импорта. Для работы с http лучший выбор это requests, а для парсинга html будем классически работать с Beautiful Soup. Ну и pandas для удобной работы с данными и выгрузки в csv.</p>
