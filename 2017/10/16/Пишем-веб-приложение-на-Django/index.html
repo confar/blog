@@ -31,9 +31,9 @@
 <meta property="og:image" content="http://confar.github.io/blog/2017/10/16/Пишем-веб-приложение-на-Django/MTV.png">
 <meta property="og:image" content="http://confar.github.io/blog/2017/10/16/Пишем-веб-приложение-на-Django/login.png">
 <meta property="og:image" content="http://confar.github.io/blog/2017/10/16/Пишем-веб-приложение-на-Django/register.png">
-<meta property="og:image" content="http://confar.github.io/blog/2017/10/16/Пишем-веб-приложение-на-Django/test.gif">
+<meta property="og:image" content="http://confar.github.io/blog/2017/10/16/Пишем-веб-приложение-на-Django/test4.gif">
 <meta property="og:image" content="http://confar.github.io/blog/2017/10/16/Пишем-веб-приложение-на-Django/success.png">
-<meta property="og:updated_time" content="2017-10-20T15:53:13.536Z">
+<meta property="og:updated_time" content="2017-10-20T16:06:01.558Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Пишем веб-приложение на Django">
 <meta name="twitter:description" content="В этой части будем реализовывать механизм авторизации пользователей через страницы логина и регистрации. Создание проектаДля начала создадим проект myproject через консоль в нужной нам папке и перейде">
@@ -221,7 +221,7 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> django.conf.urls <span class="keyword">import</span> url, include <span class="comment"># добавляем метод include</span></div><div class="line"><span class="keyword">from</span> django.contrib <span class="keyword">import</span> admin <span class="comment"># это прописывается автоматически, не меняем</span></div><div class="line"></div><div class="line"></div><div class="line">urlpatterns = [</div><div class="line">    url(<span class="string">r'^admin/'</span>, admin.site.urls), <span class="comment"># также не меняем</span></div><div class="line">    url(<span class="string">r'^account/'</span>, include(<span class="string">'registration.urls'</span>)) <span class="comment"># добавляем urls нашего приложения registration</span></div><div class="line">]</div></pre></td></tr></table></figure>
 <p>Теперь мы должны получить страницу логина при входе. Таким образом, ссылки как бы нанизываются друг на друга. account + login в url передаст в браузер нужную нас страницу логина. Попробуем. Для корректной работы формы сделаем миграцию базы данных и запустим проект.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ python manage.py makemigrations</div><div class="line">$ python manage.py migrate</div><div class="line">$ python manage.py runserver</div></pre></td></tr></table></figure>
-<h1 id="Результаты"><a href="#Результаты" class="headerlink" title="Результаты"></a>Результаты</h1><img src="/blog/2017/10/16/Пишем-веб-приложение-на-Django/test.gif" alt="gif" title="gif">
+<h1 id="Результаты"><a href="#Результаты" class="headerlink" title="Результаты"></a>Результаты</h1><img src="/blog/2017/10/16/Пишем-веб-приложение-на-Django/test4.gif" alt="gif" title="gif">
 <p>Ну чтож, даже ребята со стоковых фото считают, что мы молодцы. Уж они явно что-то знают.</p>
 <img src="/blog/2017/10/16/Пишем-веб-приложение-на-Django/success.png" alt="Успешно" title="Успешно">
 <p>Код этой статьи можно найти в моем <a href="https://github.com/confar/Django-auth-app" target="_blank" rel="external">репозитории</a> на github.</p>
@@ -232,7 +232,7 @@
     <div class="content">
         
 <span class="post-time">
-    Обновлено: <time datetime="2017-10-20T15:53:13.536Z" itemprop="dateUpdated">2017-10-20 18:53:13</time>
+    Обновлено: <time datetime="2017-10-20T16:06:01.558Z" itemprop="dateUpdated">2017-10-20 19:06:01</time>
 </span><br>
 
 

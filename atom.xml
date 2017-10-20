@@ -5,7 +5,7 @@
   <link href="/blog/atom.xml" rel="self"/>
   
   <link href="http://confar.github.io/blog/"/>
-  <updated>2017-10-20T15:53:13.536Z</updated>
+  <updated>2017-10-20T16:06:01.558Z</updated>
   <id>http://confar.github.io/blog/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://confar.github.io/blog/2017/10/16/%D0%9F%D0%B8%D1%88%D0%B5%D0%BC-%D0%B2%D0%B5%D0%B1-%D0%BF%D1%80%D0%B8%D0%BB%D0%BE%D0%B6%D0%B5%D0%BD%D0%B8%D0%B5-%D0%BD%D0%B0-Django/"/>
     <id>http://confar.github.io/blog/2017/10/16/Пишем-веб-приложение-на-Django/</id>
     <published>2017-10-16T12:13:04.000Z</published>
-    <updated>2017-10-20T15:53:13.536Z</updated>
+    <updated>2017-10-20T16:06:01.558Z</updated>
     
     <content type="html"><![CDATA[<p>В этой части будем реализовывать механизм авторизации пользователей через страницы логина и регистрации.</p>
 <h1 id="Создание-проекта"><a href="#Создание-проекта" class="headerlink" title="Создание проекта"></a>Создание проекта</h1><p>Для начала создадим проект myproject через консоль в нужной нам папке и перейдем в папку проекта. Внутри проекта создадим приложение джанго - registration</p>
@@ -63,7 +63,7 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> django.conf.urls <span class="keyword">import</span> url, include <span class="comment"># добавляем метод include</span></div><div class="line"><span class="keyword">from</span> django.contrib <span class="keyword">import</span> admin <span class="comment"># это прописывается автоматически, не меняем</span></div><div class="line"></div><div class="line"></div><div class="line">urlpatterns = [</div><div class="line">    url(<span class="string">r'^admin/'</span>, admin.site.urls), <span class="comment"># также не меняем</span></div><div class="line">    url(<span class="string">r'^account/'</span>, include(<span class="string">'registration.urls'</span>)) <span class="comment"># добавляем urls нашего приложения registration</span></div><div class="line">]</div></pre></td></tr></table></figure>
 <p>Теперь мы должны получить страницу логина при входе. Таким образом, ссылки как бы нанизываются друг на друга. account + login в url передаст в браузер нужную нас страницу логина. Попробуем. Для корректной работы формы сделаем миграцию базы данных и запустим проект.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ python manage.py makemigrations</div><div class="line">$ python manage.py migrate</div><div class="line">$ python manage.py runserver</div></pre></td></tr></table></figure>
-<h1 id="Результаты"><a href="#Результаты" class="headerlink" title="Результаты"></a>Результаты</h1><img src="/blog/2017/10/16/Пишем-веб-приложение-на-Django/test.gif" alt="gif" title="gif">
+<h1 id="Результаты"><a href="#Результаты" class="headerlink" title="Результаты"></a>Результаты</h1><img src="/blog/2017/10/16/Пишем-веб-приложение-на-Django/test4.gif" alt="gif" title="gif">
 <p>Ну чтож, даже ребята со стоковых фото считают, что мы молодцы. Уж они явно что-то знают.</p>
 <img src="/blog/2017/10/16/Пишем-веб-приложение-на-Django/success.png" alt="Успешно" title="Успешно">
 <p>Код этой статьи можно найти в моем <a href="https://github.com/confar/Django-auth-app" target="_blank" rel="external">репозитории</a> на github.</p>
