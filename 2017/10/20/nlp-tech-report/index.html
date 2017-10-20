@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>Аналитический обзор технологии NLP | Блог о программировании и аналитике</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="">
+    <meta name="description" content="Как-то меня попросили сделать обзор применения технологии обработки естественного языка или Natural Language Processing на английском. Ни в коем случае не путать с нейро-лингвистическим программирован">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Аналитический обзор технологии NLP">
+<meta property="og:url" content="http://confar.github.io/blog/2017/10/20/nlp-tech-report/index.html">
+<meta property="og:site_name" content="Блог о программировании и аналитике">
+<meta property="og:description" content="Как-то меня попросили сделать обзор применения технологии обработки естественного языка или Natural Language Processing на английском. Ни в коем случае не путать с нейро-лингвистическим программирован">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2017-10-20T17:01:34.622Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Аналитический обзор технологии NLP">
+<meta name="twitter:description" content="Как-то меня попросили сделать обзор применения технологии обработки естественного языка или Natural Language Processing на английском. Ни в коем случае не путать с нейро-лингвистическим программирован">
+    
+        <link rel="alternate" type="application/atom+xml" title="Блог о программировании и аналитике" href="/blog/atom.xml">
+    
+    <link rel="shortcut icon" href="/blog/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/blog/img/brand.jpg)">
+      <div class="brand">
+        <a href="/blog/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/blog/img/images.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Confar</h5>
+          <a href="mailto:Программирую, интересуюсь анализом данных и машинным обучением" title="Программирую, интересуюсь анализом данных и машинным обучением" class="mail">Программирую, интересуюсь анализом данных и машинным обучением</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/blog/"  >
+                <i class="icon icon-lg icon-home"></i>
+                Главная
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/blog/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Все посты
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/blog/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Теги
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/confar" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Аналитический обзор технологии NLP</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Поиск">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Аналитический обзор технологии NLP</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-10-20T16:12:01.000Z" itemprop="datePublished" class="page-time">
+  2017-10-20
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>Содержание</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Natural-language-processing-as-a-service"><span class="post-toc-text">Natural language processing as a service</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Tech"><span class="post-toc-text">Tech</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Tech-barriers"><span class="post-toc-text">Tech barriers</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Main-customers-and-why-do-they-need-it"><span class="post-toc-text">Main customers and why do they need it?</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#How-are-the-companies-using-it"><span class="post-toc-text">How are the companies using it?</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Business-model"><span class="post-toc-text">Business model</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Market-assessment"><span class="post-toc-text">Market assessment</span></a></li></ol>
+        </nav>
+    </aside>
+    
+
+<article id="post-nlp-tech-report"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Аналитический обзор технологии NLP</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017-10-20 19:12:01" datetime="2017-10-20T16:12:01.000Z"  itemprop="datePublished">2017-10-20</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>Как-то меня попросили сделать обзор применения технологии обработки естественного языка или Natural Language Processing на английском. Ни в коем случае не путать с нейро-лингвистическим программированием, о котором так любят говорит коучи и прочие self-help гуру. Переводить на русский не буду, поэтому вывешу сюда как есть, может быть кому-то пригодится=)</p>
+<h1 id="Natural-language-processing-as-a-service"><a href="#Natural-language-processing-as-a-service" class="headerlink" title="Natural language processing as a service"></a>Natural language processing as a service</h1><p>Natural language processing is a field at the intersection of computer science, artificial intelligence and linguistics.<br>The goal for computers is to process or “understand” natural language in order to perform tasks that are useful, for example performing tasks, like making appointments or buying things.<br>The alternate usage is question answering and human-to-machine communations (Siri, Google Assistant, Facebook M, Cortana).</p>
+<h1 id="Tech"><a href="#Tech" class="headerlink" title="Tech"></a>Tech</h1><p>Primarily, the architecture is more or less the same – the spoken(or written) input (top left) is analyzed, words are recognized, sentences are parsed and interpreted in context, application-specific actions take place (top right); a response is planned, realized as a syntactic structure, then to suitably inflected words, and finally to spoken output; different types of linguistic knowledge inform each stage of the process.</p>
+
+<p>Trends (more on each later) –</p>
+<ul>
+<li>Interactive Voice Response (IVR)</li>
+<li>Optical Character Recognition (OCR)</li>
+<li>Pattern and Image Recognition</li>
+<li>Classification and Categorization</li>
+<li>Text Analytics</li>
+<li>Speech Analytics</li>
+<li>Support and Maintenance Services</li>
+</ul>
+<p>Since the sphere is deeply interconnected with machine and deep learning, any sufficient progress in these spheres will affect the language recognition dramatically.</p>
+<h1 id="Tech-barriers"><a href="#Tech-barriers" class="headerlink" title="Tech barriers"></a>Tech barriers</h1><p>Natural language systems that have been deployed for real-world applications still cannot perform common-sense reasoning or draw on world knowledge in a general and robust manner.<br>Natural language processing is successful in meeting the challenges as far as syntax is concerned. But it still has to go a long way in the areas of semantics, e.g. finding the meaning of a word or a word sense, determining scopes of quantifiers, finding referents and context.</p>
+<p>Barriers of non-tech origin<br>The government regulation and laws that prohibit solution to language barriers is a huge difficulty. Low adoption rates are also stopping the growth. Areas that have no need to enter a multilingual marketplace are failing by a global community.</p>
+<h1 id="Main-customers-and-why-do-they-need-it"><a href="#Main-customers-and-why-do-they-need-it" class="headerlink" title="Main customers and why do they need it?"></a>Main customers and why do they need it?</h1><ul>
+<li>Government agencies</li>
+<li>NLP Original Equipment Manufacturers (OEMs)</li>
+<li>NLP service providers</li>
+<li>System integrators</li>
+<li>Consulting firms</li>
+<li>Research organizations</li>
+<li>Resellers and distributors</li>
+<li>Media</li>
+</ul>
+<p>The demand for NLP solutions is fueled mostly by the increased need to process unstructured and semi-structured data in enterprise networks. The rapid expansion in the acceptance of social networking and social media platforms and the growing focus on social media monitoring and social media intelligence (SMI) are other compelling factors influencing demand for NLP technologies.</p>
+<h2 id="How-are-the-companies-using-it"><a href="#How-are-the-companies-using-it" class="headerlink" title="How are the companies using it?"></a>How are the companies using it?</h2><ul>
+<li>NLP technologies are gaining traction in text analytics, designed to unlock business value buried within the vast data assets of a company in a resourceful and seamless manner. Examples – <a href="https://www.addstructure.com/" target="_blank" rel="external">Addstructure</a>, <a href="https://www.crunchbase.com/organization/angel-ai" target="_blank" rel="external">Angel.ai</a>, <a href="https://www.klevu.com/" target="_blank" rel="external">Klevu</a></li>
+<li>Speech analytics is another important and growing application area, where NLP tools are finding preference for capturing the voice of the customer taking into consideration phrasing, punctuation, and tone of voice and other parameters. Examples – <a href="https://api.ai/" target="_blank" rel="external">api.ai</a>, <a href="https://www.mindmeld.com/" target="_blank" rel="external">mindmeld</a></li>
+<li>As a recognition platform, NLP is sensing opportunities in interactive voice recognition (IVR), image recognition, and optical character recognition (OCR) verticals.</li>
+<li>Spam mail blocking is another growing use case for NLP technologies.</li>
+<li>By end-use sector, NLP technologies are making strong gains in healthcare &amp; life sciences, banking &amp; financial services, insurance, legal, IT &amp; telecom, government, media &amp; advertisement, and consumer electronics among others. Examples - <a href="https://www.lexalytics.com/" target="_blank" rel="external">Lexalytics</a></li>
+<li>A key trend making waves in the market is the growing popularity of cloud-based NLP-as-a-Service solutions Examples – <a href="https://www.digitalgenius.com/" target="_blank" rel="external">DigitalGenius</a>, <a href="https://www.inbenta.com/en/" target="_blank" rel="external">Inbenta</a></li>
+</ul>
+<h1 id="Business-model"><a href="#Business-model" class="headerlink" title="Business model"></a>Business model</h1><p>The most famous verticals for NLP are:</p>
+<ul>
+<li>Banking, Financial Services, and Insurance (BFSI)</li>
+<li>Manufacturing</li>
+<li>Healthcare and Life Sciences</li>
+<li>Retail and Consumer Goods</li>
+<li>Research and Education</li>
+<li>High Tech and Electronics</li>
+<li>Media and Entertainment</li>
+</ul>
+<p>The most common business model is NLP-as-a Service. The companies setup online services that rely on their tools, and provide a free number of API calls for those, charging for additional calls (or call-range) to your API. Or it could be a full version, for example chatbot text recognition in customer service with annual payments for the service.</p>
+<h1 id="Market-assessment"><a href="#Market-assessment" class="headerlink" title="Market assessment"></a>Market assessment</h1><p>According to Markets and Markets , the NLP market size is estimated to grow from USD 7.63 Billion in 2016 to USD 16.07 Billion by 2021, at a Compound Annual Growth Rate (CAGR) of 16.1%.The major forces driving the NLP market are increase in demand for enhanced customer experience, increase in usage of smart devices, number of emerging options in application areas, increased investment in healthcare industry, increased deployment of web &amp; cloud-based business applications, and growth in machine-to-machine technology</p>
+<p>North America is expected to have the largest market share and would dominate the NLP market from 2016 to 2021, due to the presence of a large number of NLP vendors.<br>East Asia offers potential growth opportunities for the NLP market. The key factors driving the growth rate in this market are increasing data generation in business organizations, growing demand for enhanced customer experience, and increase in the adoption and utility of smart devices.<br>In the NLP market, solution vendors such as 3M, Apple Incorporation, Dolbey Systems, Google, HP, IBM Incorporation, Microsoft Corporation, NetBase Solutions, SAS Institute Inc., and Verint Systems offer high-end NLP solutions.<br>All in all, the market is growing rapidly.</p>
+<p>What kind of bisuness has a potential in NLP?</p>
+<ul>
+<li>Assistants – marketing, sales or financial corporate assistant/ examples - <a href="http://www.aiden.ai/" target="_blank" rel="external">Aiden</a>, <a href="https://www.salesforce.com/eu/products/einstein/overview/" target="_blank" rel="external">Einstein</a></li>
+<li>Online service consultants – chatbots - <a href="https://yamichat.ru/" target="_blank" rel="external">Yamichat</a></li>
+<li>HR companies – help to automate the calls with the canditates. For example, <a href="http://www.ipsoft.com/amelia/" target="_blank" rel="external">Amelia</a> and one Russian <a href="https://robotvera.com/" target="_blank" rel="external">startup</a>.</li>
+<li>Corporations dealing with troubled customers or the ones who want to analyze the worker’s attitude towards their occupation -  <a href="http://www.lexalytics.com/" target="_blank" rel="external">Semantria</a></li>
+</ul>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    Обновлено: <time datetime="2017-10-20T17:01:34.622Z" itemprop="dateUpdated">2017-10-20 20:01:34</time>
+</span><br>
+
+
+        
+        Прямая ссылка на пост <a href="/blog/2017/10/20/nlp-tech-report/" target="_blank" rel="external">http://confar.github.io/blog/2017/10/20/nlp-tech-report/</a>
+        
+    </div>
+    <footer>
+        <a href="http://confar.github.io/blog">
+            <img src="/blog/img/images.png" alt="Confar">
+            Confar
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+     <!--  <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://confar.github.io/blog/2017/10/20/nlp-tech-report/&title=《Аналитический обзор технологии NLP》 — Блог о программировании и аналитике&pic=http://confar.github.io/blog/img/images.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://confar.github.io/blog/2017/10/20/nlp-tech-report/&title=《Аналитический обзор технологии NLP》 — Блог о программировании и аналитике&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li> -->
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://confar.github.io/blog/2017/10/20/nlp-tech-report/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Аналитический обзор технологии NLP》 — Блог о программировании и аналитике&url=http://confar.github.io/blog/2017/10/20/nlp-tech-report/&via=http://confar.github.io/blog" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://confar.github.io/blog/2017/10/20/nlp-tech-report/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/blog/2017/10/16/django-auth-app/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Пишем веб-приложение на Django</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+<!-- 
+ -->
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+
+</p>
+
+
+
+    </div>
+    <div class="bottom">
+        
+                <p><span><a href="/blog/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+        <span>Confar &copy; 2017</span>
+
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+     <!--  <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://confar.github.io/blog/2017/10/20/nlp-tech-report/&title=《Аналитический обзор технологии NLP》 — Блог о программировании и аналитике&pic=http://confar.github.io/blog/img/images.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://confar.github.io/blog/2017/10/20/nlp-tech-report/&title=《Аналитический обзор технологии NLP》 — Блог о программировании и аналитике&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li> -->
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://confar.github.io/blog/2017/10/20/nlp-tech-report/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Аналитический обзор технологии NLP》 — Блог о программировании и аналитике&url=http://confar.github.io/blog/2017/10/20/nlp-tech-report/&via=http://confar.github.io/blog" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://confar.github.io/blog/2017/10/20/nlp-tech-report/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://confar.github.io/blog/2017/10/20/nlp-tech-report/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/blog/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '(~˘▾˘)~ ТУТ ТАКОЕ';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'Показалось';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
