@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>Пишем веб-приложение на Django | Блог о программировании и аналитике</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="python,Django,web">
+    <meta name="description" content="В этой части будем реализовывать механизм авторизации пользователей через страницы логина и регистрации. Создание проектаДля начала создадим проект myproject через консоль в нужной нам папке и перейде">
+<meta name="keywords" content="python,Django,web">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Пишем веб-приложение на Django">
+<meta property="og:url" content="http://confar.github.io/blog/2017/10/16/Пишем-веб-приложение-на-Django/index.html">
+<meta property="og:site_name" content="Блог о программировании и аналитике">
+<meta property="og:description" content="В этой части будем реализовывать механизм авторизации пользователей через страницы логина и регистрации. Создание проектаДля начала создадим проект myproject через консоль в нужной нам папке и перейде">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http://confar.github.io/blog/2017/10/16/Пишем-веб-приложение-на-Django/MTV.png">
+<meta property="og:image" content="http://confar.github.io/blog/2017/10/16/Пишем-веб-приложение-на-Django/login.png">
+<meta property="og:image" content="http://confar.github.io/blog/2017/10/16/Пишем-веб-приложение-на-Django/register.png">
+<meta property="og:image" content="http://confar.github.io/blog/2017/10/16/Пишем-веб-приложение-на-Django/test.gif">
+<meta property="og:image" content="http://confar.github.io/blog/2017/10/16/Пишем-веб-приложение-на-Django/success.png">
+<meta property="og:updated_time" content="2017-10-20T15:46:47.005Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Пишем веб-приложение на Django">
+<meta name="twitter:description" content="В этой части будем реализовывать механизм авторизации пользователей через страницы логина и регистрации. Создание проектаДля начала создадим проект myproject через консоль в нужной нам папке и перейде">
+<meta name="twitter:image" content="http://confar.github.io/blog/2017/10/16/Пишем-веб-приложение-на-Django/MTV.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="Блог о программировании и аналитике" href="/blog/atom.xml">
+    
+    <link rel="shortcut icon" href="/blog/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/blog/img/brand.jpg)">
+      <div class="brand">
+        <a href="/blog/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/blog/img/images.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">Confar</h5>
+          <a href="mailto:Программирую, интересуюсь анализом данных и машинным обучением" title="Программирую, интересуюсь анализом данных и машинным обучением" class="mail">Программирую, интересуюсь анализом данных и машинным обучением</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/blog/"  >
+                <i class="icon icon-lg icon-home"></i>
+                Главная
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/blog/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Все посты
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/blog/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Теги
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/confar" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Пишем веб-приложение на Django</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="Поиск">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Пишем веб-приложение на Django</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-10-16T12:13:04.000Z" itemprop="datePublished" class="page-time">
+  2017-10-16
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>Содержание</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Создание-проекта"><span class="post-toc-text">Создание проекта</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Находим-наши-страницы"><span class="post-toc-text">Находим наши страницы</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Пишем-вьюжки"><span class="post-toc-text">Пишем вьюжки</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Разбираемся-с-формами"><span class="post-toc-text">Разбираемся с формами</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Конфигурация-URL-ов"><span class="post-toc-text">Конфигурация URL-ов</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Результаты"><span class="post-toc-text">Результаты</span></a></li></ol>
+        </nav>
+    </aside>
+    
+
+<article id="post-Пишем-веб-приложение-на-Django"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Пишем веб-приложение на Django</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017-10-16 15:13:04" datetime="2017-10-16T12:13:04.000Z"  itemprop="datePublished">2017-10-16</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>В этой части будем реализовывать механизм авторизации пользователей через страницы логина и регистрации.</p>
+<h1 id="Создание-проекта"><a href="#Создание-проекта" class="headerlink" title="Создание проекта"></a>Создание проекта</h1><p>Для начала создадим проект myproject через консоль в нужной нам папке и перейдем в папку проекта. Внутри проекта создадим приложение джанго - registration</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ django-admin startproject myproject</div><div class="line">$ <span class="built_in">cd</span> myproject</div><div class="line">$ python manage.py startapp registration</div></pre></td></tr></table></figure>
+<p>теперь структура внутри registration выглядит следующим образом</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">│   admin.py</div><div class="line">│   apps.py</div><div class="line">│   models.py</div><div class="line">│   tests.py</div><div class="line">│   views.py</div><div class="line">│   __init__.py</div><div class="line">│</div><div class="line">└───migrations</div></pre></td></tr></table></figure>
+<p>Так как в Django реализована архитектура <a href="https://ru.wikipedia.org/wiki/Model-View-Controller" target="_blank" rel="external">MVC</a>, то в нашем случае “M” - models.py, это файл, где прописывается логика взаимодействия с базой данных, “C”, в случае Django “Template”, это представление данных в браузере через html, а views это бизнес-логика, как применять модели и шаблоны. Годная картинка по теме:</p>
+<img src="/blog/2017/10/16/Пишем-веб-приложение-на-Django/MTV.png" alt="MTV" title="MTV">
+<p>Так как авторизация в нашем случае для тестового проекта, а не для большого e-commerce сайта, то реализуем взаимодействие с базой данных не через models.py, а через форму и встроенную в Django модель User, так что файл models.py можем удалять, как и tests.py - в этой части мы их оставим. Теперь структура нашего приложения выглядит так:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">│   admin.py</div><div class="line">│   apps.py</div><div class="line">│   forms.py</div><div class="line">│   views.py</div><div class="line">│   __init__.py</div><div class="line">│</div><div class="line">└───migrations</div></pre></td></tr></table></figure>
+<p>Всего у нас будет три страницы html: для тех, кто пришел в первый раз(login.html), для регистрации(register.html) и для тех, кто успешно прошел регистрацию и зашел через логин(success.html).</p>
+<p>Итого у нас два use-case</p>
+<ul>
+<li>для пришедших в первый раз: login -&gt; register -&gt; login -&gt; success</li>
+<li>для пришедших повторно login -&gt; success</li>
+</ul>
+<p>Обрабатывать результаты будем через формы и регистрационные данные записывать в базу данных sqlite3(которая создается по умолчанию для проекта Django). Перейдем к коду.</p>
+<h1 id="Находим-наши-страницы"><a href="#Находим-наши-страницы" class="headerlink" title="Находим наши страницы"></a>Находим наши страницы</h1><p>Для примера возьмем бутстраповские страницы <a href="https://bootsnipp.com/snippets/featured/sign-in-panel" target="_blank" rel="external">логина</a> и <a href="https://bootsnipp.com/snippets/featured/registration-form" target="_blank" rel="external">регистрации</a> и немного их изменим, дополнив тегами Jinja2.</p>
+<p>Все темплейты хранятся в папке templates, которую мы создадим в основном проекте.Таким образом, структура проекта со всеми добавленными темплейтами будет выглядеть так:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">|-- myproject</div><div class="line">|   `-- __pycache__</div><div class="line">|-- registration</div><div class="line">|   |-- __pycache__</div><div class="line">|   `-- migrations</div><div class="line">|       `-- __pycache__</div><div class="line">|-- templates</div><div class="line">|   -- base.html</div><div class="line">|   -- login.html</div><div class="line">|   -- register.html</div><div class="line">`   -- success.html</div></pre></td></tr></table></figure>
+<p>Код страницы логина. При сабмите формы идет ссылка на функцию account<em>login c post запросом.{% csrf_token %} это обеспечение безопасности от [межсайтовой подделки запроса](<a href="https://ru.wikipedia.org/wiki/%D0%9C%D0%B5%D0%B6%D1%81%D0%B0%D0%B9%D1%82%D0%BE%D0%B2%D0%B0%D1%8F" target="_blank" rel="external">https://ru.wikipedia.org/wiki/%D0%9C%D0%B5%D0%B6%D1%81%D0%B0%D0%B9%D1%82%D0%BE%D0%B2%D0%B0%D1%8F</a></em>%D0%BF%D0%BE%D0%B4%D0%B4%D0%B5%D0%BB%D0%BA%D0%B0_%D0%B7%D0%B0%D0%BF%D1%80%D0%BE%D1%81%D0%B0). Используется в формах в связи с post-запросами. Они опаснее обычных get запросов, т.к. взаимодействуют с базой данных.</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div></pre></td><td class="code"><pre><div class="line">&#123;% extends "base.html" %&#125;</div><div class="line">&#123;% block title %&#125;Login&#123;% endblock %&#125;</div><div class="line">&#123;% block content %&#125;</div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"container"</span> <span class="attr">style</span>=<span class="string">"margin-top:40px"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"row"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"col-sm-6 col-md-4 col-md-offset-4"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"panel panel-default"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"panel-heading"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">strong</span>&gt;</span> Sign in to continue<span class="tag">&lt;/<span class="name">strong</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"panel-body"</span>&gt;</span></div><div class="line">&#123;% if error %&#125;</div><div class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">"text-danger"</span>&gt;</span>Please enter a correct username and password.</div><div class="line">Note that both fields may be case-sensitive.<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">&#123;% endif %&#125;</div><div class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">role</span>=<span class="string">"form"</span> <span class="attr">action</span>=<span class="string">"&#123;% url "</span><span class="attr">account_login</span>" %&#125;" <span class="attr">method</span>=<span class="string">"POST"</span>&gt;</span>&#123;% csrf_token %&#125;</div><div class="line"><span class="tag">&lt;<span class="name">fieldset</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"row"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"center-block"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">class</span>=<span class="string">"profile-img"</span></span></div><div class="line"><span class="tag">    <span class="attr">src</span>=<span class="string">"http://bit.ly/2gSVBOy"</span></span></div><div class="line"><span class="tag">    <span class="attr">alt</span>=<span class="string">""</span> <span class="attr">style</span>=<span class="string">"width: 96px; height: 96px; margin: 0 auto 10px;</span></span></div><div class="line"><span class="tag"><span class="string">    display: block; -moz-border-radius: 50%; -webkit-border-radius: 50%;</span></span></div><div class="line"><span class="tag"><span class="string">     border-radius: 50%;"</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"row"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"col-sm-12 col-md-10  col-md-offset-1 "</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"form-group"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"input-group"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"input-group-addon"</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">i</span> <span class="attr">class</span>=<span class="string">"glyphicon glyphicon-user"</span>&gt;</span><span class="tag">&lt;/<span class="name">i</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">class</span>=<span class="string">"form-control"</span> <span class="attr">placeholder</span>=<span class="string">"Username"</span></span></div><div class="line"><span class="tag">        <span class="attr">name</span>=<span class="string">"username"</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">autofocus</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"form-group"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"input-group"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"input-group-addon"</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">i</span> <span class="attr">class</span>=<span class="string">"glyphicon glyphicon-lock"</span>&gt;</span><span class="tag">&lt;/<span class="name">i</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">class</span>=<span class="string">"form-control"</span> <span class="attr">placeholder</span>=<span class="string">"Password"</span> <span class="attr">name</span>=<span class="string">"password"</span></span></div><div class="line"><span class="tag">        <span class="attr">type</span>=<span class="string">"password"</span> <span class="attr">value</span>=<span class="string">""</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"form-group"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">"submit"</span> <span class="attr">class</span>=<span class="string">"btn btn-lg btn-primary btn-block"</span>&gt;</span>Sign in</div><div class="line">    <span class="tag">&lt;/<span class="name">button</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">fieldset</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"panel-footer"</span> <span class="attr">style</span>=<span class="string">"padding: 1px 15px;</span></span></div><div class="line"><span class="tag"><span class="string">color: #A0A0A0"</span>&gt;</span></div><div class="line">Don't have an account? <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"&#123;% url "</span><span class="attr">account_register</span>" %&#125;"&gt;</span> Sign Up Here <span class="tag">&lt;/<span class="name">a</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">&#123;% endblock %&#125;</div></pre></td></tr></table></figure>
+<p>Как выглядит в браузере</p>
+<img src="/blog/2017/10/16/Пишем-веб-приложение-на-Django/login.png" alt="login" title="login">
+<p>Код страницы регистрации с валидацией ошибок. При сабмите формы также идет ссылка на функцию account_register c post запросом.</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div></pre></td><td class="code"><pre><div class="line">&#123;% extends "base.html" %&#125; &#123;% block title %&#125;Register&#123;% endblock %&#125;</div><div class="line">&#123;% block content %&#125;</div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"container"</span> <span class="attr">style</span>=<span class="string">"margin-top: 60px"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"row centered-form"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"col-xs-12 col-sm-8 col-md-4 col-sm-offset-2</span></span></div><div class="line"><span class="tag"><span class="string">col-md-offset-4"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"panel panel-default"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"panel-heading"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">h3</span> <span class="attr">class</span>=<span class="string">"panel-title"</span>&gt;</span>Register<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"panel-body"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">role</span>=<span class="string">"form"</span> <span class="attr">method</span>=<span class="string">"POST"</span> <span class="attr">action</span>=<span class="string">"&#123;% url "</span></span></div><div class="line"><span class="tag"><span class="attr">account_register</span>"  %&#125;"&gt;</span>&#123;% csrf_token %&#125;</div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"form-group&#123;% if errors.username %&#125;</span></span></div><div class="line"><span class="tag"><span class="string">    has-error&#123;% endif %&#125;"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"username"</span> <span class="attr">name</span>=<span class="string">"username"</span></span></div><div class="line"><span class="tag">        <span class="attr">id</span>=<span class="string">"username"</span> <span class="attr">class</span>=<span class="string">"form-control input-sm"</span></span></div><div class="line"><span class="tag">        <span class="attr">placeholder</span>=<span class="string">"Username"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"text-danger"</span>&gt;</span></div><div class="line">        &#123;&#123; errors.username|striptags &#125;&#125;<span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"row"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"col-xs-6 col-sm-6 col-md-6"</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">div</span></span></div><div class="line"><span class="tag">            <span class="attr">class</span>=<span class="string">"form-group&#123;% if errors.first_name %&#125; has-error&#123;% endif %&#125;"</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">name</span>=<span class="string">"first_name"</span></span></div><div class="line"><span class="tag">                <span class="attr">id</span>=<span class="string">"first_name"</span></span></div><div class="line"><span class="tag">                <span class="attr">class</span>=<span class="string">"form-control input-sm"</span></span></div><div class="line"><span class="tag">                <span class="attr">placeholder</span>=<span class="string">"First Name"</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"text-danger"</span>&gt;</span></div><div class="line">                &#123;&#123; errors.first_name|striptags &#125;&#125;<span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"col-xs-6 col-sm-6 col-md-6"</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">div</span></span></div><div class="line"><span class="tag">            <span class="attr">class</span>=<span class="string">"form-group&#123;% if errors.last_name %&#125; has-error&#123;% endif %&#125;"</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">name</span>=<span class="string">"last_name"</span></span></div><div class="line"><span class="tag">                <span class="attr">id</span>=<span class="string">"last_name"</span></span></div><div class="line"><span class="tag">                <span class="attr">class</span>=<span class="string">"form-control input-sm"</span></span></div><div class="line"><span class="tag">                <span class="attr">placeholder</span>=<span class="string">"Last Name"</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"text-danger"</span>&gt;</span></div><div class="line">                &#123;&#123; errors.last_name|striptags &#125;&#125;<span class="tag">&lt;/<span class="name">span</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"form-group&#123;% if errors.email %&#125; has-error&#123;% endif %&#125;"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"email"</span> <span class="attr">name</span>=<span class="string">"email"</span> <span class="attr">id</span>=<span class="string">"email"</span></span></div><div class="line"><span class="tag">        <span class="attr">class</span>=<span class="string">"form-control input-sm"</span> <span class="attr">placeholder</span>=<span class="string">"Email Address"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"text-danger"</span>&gt;</span>&#123;&#123; errors.email|striptags &#125;&#125;<span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"row"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"col-xs-6 col-sm-6 col-md-6"</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">div</span></span></div><div class="line"><span class="tag">            <span class="attr">class</span>=<span class="string">"form-group&#123;% if errors.password %&#125; has-error&#123;% endif %&#125;"</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"password"</span> <span class="attr">name</span>=<span class="string">"password"</span> <span class="attr">id</span>=<span class="string">"password"</span></span></div><div class="line"><span class="tag">                <span class="attr">class</span>=<span class="string">"form-control input-sm"</span> <span class="attr">placeholder</span>=<span class="string">"Password"</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"text-danger"</span>&gt;</span>&#123;&#123; errors.password|striptags &#125;&#125;</div><div class="line">                <span class="tag">&lt;/<span class="name">span</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"col-xs-6 col-sm-6 col-md-6"</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">div</span></span></div><div class="line"><span class="tag">            <span class="attr">class</span>=<span class="string">"form-group&#123;% if errors.password %&#125; has-error&#123;% endif %&#125;"</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"password"</span> <span class="attr">name</span>=<span class="string">"confirm_password"</span></span></div><div class="line"><span class="tag">                <span class="attr">id</span>=<span class="string">"confirm_password"</span> <span class="attr">class</span>=<span class="string">"form-control input-sm"</span></span></div><div class="line"><span class="tag">                <span class="attr">placeholder</span>=<span class="string">"Confirm Password"</span>&gt;</span></div><div class="line">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">"submit"</span> <span class="attr">class</span>=<span class="string">"btn btn-info btn-block"</span>&gt;</span>Register<span class="tag">&lt;/<span class="name">button</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">&#123;% endblock %&#125;</div></pre></td></tr></table></figure>
+<p>Как выглядит страница регистрации</p>
+<img src="/blog/2017/10/16/Пишем-веб-приложение-на-Django/register.png" alt="register" title="register">
+<p>И страницу успешного входа мы увидим уже в конце, если у нас все получится=)</p>
+<p>В начале каждого документа стоит тег {% extends "base.html" %}, что является расширением одного темплейта на базе основного, в Джанго основной темплейт классически называется base.html. Это удобно, так как не приходится копировать один и тот же код в хедере разных страниц. Получается, что весь контент отдельной страницы помещается между тегами {% block content %} и {% endblock %} . Подробнее можно почитать <a href="https://tutorial.djangogirls.org/en/template_extending/" target="_blank" rel="external">здесь</a>.</p>
+<p>Содержание base.html</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">link</span> <span class="attr">href</span>=<span class="string">"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"</span></span></div><div class="line"><span class="tag">  <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">integrity</span>=<span class="string">"sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"</span> <span class="attr">crossorigin</span>=<span class="string">"anonymous"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width, initial-scale=1"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">title</span>&gt;</span>&#123;% block title %&#125;</div><div class="line">    &#123;% endblock %&#125; | Auth app<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">    &#123;% block content %&#125;</div><div class="line">    &#123;% endblock %&#125;</div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
+<h1 id="Пишем-вьюжки"><a href="#Пишем-вьюжки" class="headerlink" title="Пишем вьюжки"></a>Пишем вьюжки</h1><p>Для обработки страниц в файле views.py пишем три функции на каждую из страниц (login,register,success) и одну функцию logout. Импортируем нужные нам модули Django, из интересных штук тут есть <a href="https://habrahabr.ru/post/141411/" target="_blank" rel="external">декоратор</a> login_required, который “дополняет” функцию успешного входа - success(), проверяя прошел ли предварительно логин в системе.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> django.contrib.auth.decorators <span class="keyword">import</span> login_required</div><div class="line"><span class="keyword">from</span> django.contrib.auth.forms <span class="keyword">import</span> AuthenticationForm</div><div class="line"><span class="keyword">from</span> django.contrib.auth.models <span class="keyword">import</span> User</div><div class="line"><span class="keyword">from</span> django.contrib.auth <span class="keyword">import</span> login, logout</div><div class="line"><span class="keyword">from</span> django.template.response <span class="keyword">import</span> TemplateResponse</div><div class="line"><span class="keyword">from</span> django.http <span class="keyword">import</span> HttpResponseRedirect</div><div class="line"><span class="keyword">from</span> django.urls <span class="keyword">import</span> reverse</div><div class="line"></div><div class="line"><span class="keyword">from</span> .forms <span class="keyword">import</span> UserCreateForm</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">login</span><span class="params">(request)</span>:</span></div><div class="line">    <span class="string">""" Функция, которая принимает http-запрос, если произведен get-запрос,</span></div><div class="line"><span class="string">    возвращает страницу логина. Если post-запрос, берет данные из базы данных,</span></div><div class="line"><span class="string">    и проверяет логин и пароль с помощью встроенной формы AuthenticationForm,</span></div><div class="line"><span class="string">    при успешном сценарии вызывает метод login, который принимает объект</span></div><div class="line"><span class="string">    реквеста и юзера, сохраняет id usera в сессию Django</span></div><div class="line"><span class="string">    и возвращает страницу success """</span></div><div class="line">    <span class="keyword">if</span> request.method == <span class="string">'POST'</span>:</div><div class="line">        form = AuthenticationForm(data=request.POST)</div><div class="line">        <span class="keyword">if</span> form.is_valid():</div><div class="line">            login(request, form.user_cache)</div><div class="line">            <span class="keyword">return</span> HttpResponseRedirect(reverse(<span class="string">'account_success'</span>))</div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            <span class="keyword">return</span> TemplateResponse(request, <span class="string">'login.html'</span>, &#123;<span class="string">'error'</span>: <span class="keyword">True</span>&#125;)</div><div class="line">    <span class="keyword">else</span>:</div><div class="line">        <span class="keyword">return</span> TemplateResponse(request, <span class="string">'login.html'</span>, &#123;&#125;)</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"><span class="meta">@login_required</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">success</span><span class="params">(request)</span>:</span></div><div class="line">    <span class="string">""" Функция, которая принимает http-запрос get и возвращает страницу</span></div><div class="line"><span class="string">    success, если пользователь успешно залогинен."""</span></div><div class="line">    <span class="keyword">return</span> TemplateResponse(request, <span class="string">'success.html'</span>, &#123;&#125;)</div><div class="line"></div><div class="line"><span class="meta">@login_required</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">account_logout</span><span class="params">(request)</span>:</span></div><div class="line"><span class="string">""" Функция, которая принимает http-запрос и разлогинивает пользователя. """</span></div><div class="line">    logout(request)</div><div class="line">    <span class="keyword">return</span> HttpResponseRedirect(reverse(<span class="string">'account_login'</span>))</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">account_register</span><span class="params">(request)</span>:</span></div><div class="line">    <span class="string">""" Функция, которая принимает http запрос, если произведен get-запрос,</span></div><div class="line"><span class="string">    возвращает страницу регистрации. Если post-запрос, проверяет форму</span></div><div class="line"><span class="string">    UserCreateForm на валидность, при успешном завершении заносит данные в</span></div><div class="line"><span class="string">    таблицу auth_user в базу. При успешном сценарии возвращает обратно на</span></div><div class="line"><span class="string">    страницу логина """</span></div><div class="line">    form = UserCreateForm()</div><div class="line">    <span class="keyword">if</span> request.method == <span class="string">'POST'</span>:</div><div class="line">        form = UserCreateForm(data=request.POST)</div><div class="line">        <span class="keyword">if</span> form.is_valid():</div><div class="line">            user = User(</div><div class="line">                username=form.cleaned_data.get(<span class="string">'username'</span>),</div><div class="line">                email=form.cleaned_data.get(<span class="string">'email'</span>),</div><div class="line">                first_name=form.cleaned_data.get(<span class="string">'first_name'</span>),</div><div class="line">                last_name=form.cleaned_data.get(<span class="string">'last_name'</span>)</div><div class="line">            )</div><div class="line">            user.set_password(form.cleaned_data.get(<span class="string">'password'</span>))</div><div class="line">            user.save()</div><div class="line">            <span class="keyword">return</span> HttpResponseRedirect(reverse(<span class="string">'account_login'</span>))</div><div class="line">        <span class="keyword">return</span> TemplateResponse(request, <span class="string">'register.html'</span>, &#123;<span class="string">'errors'</span>: form.errors&#125;)</div><div class="line">    <span class="keyword">else</span>:</div><div class="line">        <span class="keyword">return</span> TemplateResponse(request, <span class="string">'register.html'</span>, &#123;<span class="string">"form"</span>: form&#125;)</div></pre></td></tr></table></figure>
+<h1 id="Разбираемся-с-формами"><a href="#Разбираемся-с-формами" class="headerlink" title="Разбираемся с формами"></a>Разбираемся с формами</h1><p>В функции register мы ссылаемся на форму UserCreateForm, которая находится в forms.py. В этом файле мы прописываем нужные нам поля из страницы регистрации. Функция clean() выполняет роль проверки совпадения значений, которые пользователь указывает в  “введите пароль” и “повторно введите пароль”.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> django.forms <span class="keyword">import</span> Form, CharField, EmailField</div><div class="line"><span class="keyword">from</span> django.forms.utils <span class="keyword">import</span> ErrorList</div><div class="line"></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">RegistrationForm</span><span class="params">(Form)</span>:</span></div><div class="line">    username = CharField(required=<span class="keyword">True</span>)</div><div class="line">    email = EmailField(required=<span class="keyword">True</span>)</div><div class="line">    password = CharField(required=<span class="keyword">True</span>)</div><div class="line">    confirm_password = CharField(required=<span class="keyword">True</span>)</div><div class="line">    first_name = CharField(required=<span class="keyword">False</span>)</div><div class="line">    last_name = CharField(required=<span class="keyword">False</span>)</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">clean</span><span class="params">(self)</span>:</span></div><div class="line">        cleaned_data = super(RegistrationForm, self).clean()</div><div class="line"></div><div class="line">        <span class="keyword">if</span> cleaned_data.get(<span class="string">'password'</span>) != cleaned_data.get(<span class="string">'confirm_password'</span>):</div><div class="line">            self._errors[<span class="string">'password'</span>] = ErrorList(<span class="string">'The passwords you entered do not match'</span>)</div><div class="line"></div><div class="line">        <span class="keyword">return</span> cleaned_data</div><div class="line"></div></pre></td></tr></table></figure>
+<h1 id="Конфигурация-URL-ов"><a href="#Конфигурация-URL-ов" class="headerlink" title="Конфигурация URL-ов"></a>Конфигурация URL-ов</h1><p>Теперь самое время настроить ссылки, по которым мы будем обращаться к нашим функциям во views. Для этого в файле urls.py внутри папки приложения registration пропишем следующее:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> django.conf.urls <span class="keyword">import</span> url</div><div class="line"><span class="keyword">from</span> registration <span class="keyword">import</span> views</div><div class="line"></div><div class="line"></div><div class="line">urlpatterns = [</div><div class="line">    url(<span class="string">r'^login/'</span>, views.account_login, name=<span class="string">'account_login'</span>),</div><div class="line">    url(<span class="string">r'^success/'</span>, views.account_success, name=<span class="string">'account_success'</span>),</div><div class="line">    url(<span class="string">r'^register/'</span>, views.account_register, name=<span class="string">'account_register'</span>),</div><div class="line">    url(<span class="string">r'^logout/'</span>, views.account_logout, name=<span class="string">'account_logout'</span>),</div><div class="line">]</div></pre></td></tr></table></figure></p>
+<p>Таким образом, мы обозначаем, что если пользователь ввел ссылку <a href="http://адресприложения/account/login" target="_blank" rel="external">http://адресприложения/account/login</a>, то вызывается функция views.login, если другой запрос - остальные ссылки по аналогии. Для конфигурации ссылок в Джанго используются регулярные выражения, тема обширная, думаю, для отдельной статьи. Пока что просто воспримем как есть.</p>
+<p>Затем включим эти url в наше основное приложение - myproject, чтобы обращаться к приложению registration. Для этого в папке myproject в файле urls.py исправим следующее</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> django.conf.urls <span class="keyword">import</span> url, include <span class="comment"># добавляем метод include</span></div><div class="line"><span class="keyword">from</span> django.contrib <span class="keyword">import</span> admin <span class="comment"># это прописывается автоматически, не меняем</span></div><div class="line"></div><div class="line"></div><div class="line">urlpatterns = [</div><div class="line">    url(<span class="string">r'^admin/'</span>, admin.site.urls), <span class="comment"># также не меняем</span></div><div class="line">    url(<span class="string">r'^account/'</span>, include(<span class="string">'registration.urls'</span>)) <span class="comment"># добавляем urls нашего приложения registration</span></div><div class="line">]</div></pre></td></tr></table></figure>
+<p>Теперь мы должны получить страницу логина при входе. Таким образом, ссылки как бы нанизываются друг на друга. account + login в url передаст в браузер нужную нас страницу логина. Попробуем. Для корректной работы формы сделаем миграцию базы данных и запустим проект.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ python manage.py makemigrations</div><div class="line">$ python manage.py migrate</div><div class="line">$ python manage.py runserver</div></pre></td></tr></table></figure>
+<h1 id="Результаты"><a href="#Результаты" class="headerlink" title="Результаты"></a>Результаты</h1><img src="/blog/2017/10/16/Пишем-веб-приложение-на-Django/test.gif" alt="gif" title="gif">
+<p>Ну чтож, даже ребята со стоковых фото считают, что мы молодцы. Уж они явно что-то знают.</p>
+<img src="/blog/2017/10/16/Пишем-веб-приложение-на-Django/success.png" alt="Успешно" title="Успешно">
+<p>Код этой статьи можно найти в моем <a href="https://github.com/confar/Django-auth-app" target="_blank" rel="external">репозитории</a> на github.</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    Обновлено: <time datetime="2017-10-20T15:46:47.005Z" itemprop="dateUpdated">2017-10-20 18:46:47</time>
+</span><br>
+
+
+        
+        Прямая ссылка на пост <a href="/blog/2017/10/16/Пишем-веб-приложение-на-Django/" target="_blank" rel="external">http://confar.github.io/blog/2017/10/16/Пишем-веб-приложение-на-Django/</a>
+        
+    </div>
+    <footer>
+        <a href="http://confar.github.io/blog">
+            <img src="/blog/img/images.png" alt="Confar">
+            Confar
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/Django/">Django</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/python/">python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/web/">web</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+     <!--  <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://confar.github.io/blog/2017/10/16/Пишем-веб-приложение-на-Django/&title=《Пишем веб-приложение на Django》 — Блог о программировании и аналитике&pic=http://confar.github.io/blog/img/images.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://confar.github.io/blog/2017/10/16/Пишем-веб-приложение-на-Django/&title=《Пишем веб-приложение на Django》 — Блог о программировании и аналитике&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li> -->
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://confar.github.io/blog/2017/10/16/Пишем-веб-приложение-на-Django/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Пишем веб-приложение на Django》 — Блог о программировании и аналитике&url=http://confar.github.io/blog/2017/10/16/Пишем-веб-приложение-на-Django/&via=http://confar.github.io/blog" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://confar.github.io/blog/2017/10/16/Пишем-веб-приложение-на-Django/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/blog/2017/10/16/web-scraping/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Web Scraping Beautiful Soup</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+<!-- 
+ -->
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+
+</p>
+
+
+
+    </div>
+    <div class="bottom">
+        
+                <p><span><a href="/blog/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+        <span>Confar &copy; 2017</span>
+
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+     <!--  <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://confar.github.io/blog/2017/10/16/Пишем-веб-приложение-на-Django/&title=《Пишем веб-приложение на Django》 — Блог о программировании и аналитике&pic=http://confar.github.io/blog/img/images.png" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://confar.github.io/blog/2017/10/16/Пишем-веб-приложение-на-Django/&title=《Пишем веб-приложение на Django》 — Блог о программировании и аналитике&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li> -->
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://confar.github.io/blog/2017/10/16/Пишем-веб-приложение-на-Django/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Пишем веб-приложение на Django》 — Блог о программировании и аналитике&url=http://confar.github.io/blog/2017/10/16/Пишем-веб-приложение-на-Django/&via=http://confar.github.io/blog" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://confar.github.io/blog/2017/10/16/Пишем-веб-приложение-на-Django/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="//api.qrserver.com/v1/create-qr-code/?data=http://confar.github.io/blog/2017/10/16/Пишем-веб-приложение-на-Django/" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/blog/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '(~˘▾˘)~ ТУТ ТАКОЕ';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'Показалось';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
