@@ -9,7 +9,7 @@
   <id>http://confar.github.io/blog/</id>
   
   <author>
-    <name>Confar</name>
+    <name>Галкин Александр</name>
     
   </author>
   
@@ -169,7 +169,7 @@
     <link href="http://confar.github.io/blog/2017/10/16/web-scraping/"/>
     <id>http://confar.github.io/blog/2017/10/16/web-scraping/</id>
     <published>2017-10-16T11:35:12.000Z</published>
-    <updated>2017-10-20T15:50:16.942Z</updated>
+    <updated>2017-10-25T21:50:01.911Z</updated>
     
     <content type="html"><![CDATA[<p>Сегодня поговорим о веб скрапинге. Допустим, стоит задача выгрузить информацию с сайта или нескольких и представить ее в таблице. Для примера я возьму techcrunch и mashable. На выходе хочу получить таблицу с колонками [текст], [краткое описание], [ссылка], чтобы не тратить время на бесконечное зависание на сайтах, ну вы знаете как это бывает=)</p>
 <h1 id="Библиотеки"><a href="#Библиотеки" class="headerlink" title="Библиотеки"></a>Библиотеки</h1><p>Начнем с импорта. Для работы с http лучший выбор это requests, а для парсинга html будем классически работать с Beautiful Soup. Ну и pandas для удобной работы с данными и выгрузки в csv.</p>
@@ -181,7 +181,7 @@
 <p>Открываем нашу ссылку в браузере через F12 и находим нужные нам элементы - тег с названием(будем искать по title), описанием(description) и url.</p>
 <p>В случае с techcrunch все нужные нам ссылки находятся в “диве” block-content, в котором находится каждый пост.</p>
 <img src="/blog/2017/10/16/web-scraping/block-content.png" alt="block-content" title="block-content">
-<p>Для подобного сценария в BS есть команда find_all(), которая находит <em>все</em> возможные вхождения тега с заданными параметрами.<br>Затем мы создаем простой for луп и пустой список, куда записываем нужные нам данные, которые также ищем по тегам внутри block-content.</p>
+<p>Для подобного сценария в BS есть метод find_all(), который находит <em>все</em> возможные вхождения тега с заданными параметрами.<br>Затем мы создаем простой for луп и пустой список, куда записываем нужные нам данные, которые также ищем по тегам внутри block-content.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">resultstech = soup.find_all(<span class="string">'div'</span>, <span class="string">'block-content'</span>,)</div><div class="line">recordstech = []</div><div class="line"><span class="keyword">for</span> result <span class="keyword">in</span> resultstech:</div><div class="line">    title = result.find(<span class="string">'h2'</span>).text.strip()</div><div class="line">    desc = result.find(<span class="string">'p'</span>, <span class="string">'excerpt'</span>).text[:<span class="number">-10</span>].strip()</div><div class="line">    link = result.find(<span class="string">'a'</span>)[<span class="string">'href'</span>]</div><div class="line">    recordstech.append((title, desc, link))</div></pre></td></tr></table></figure>
 <p>Для удобства обрезаем пробелы с помощью метода strip(), и последние десять символов в desc, обратившись к ним по индексу[:-10], т.к. они представляют собой фразу “Read More” для каждого поста.</p>
 <p>На выходе мы получили список из кортежей, где находятся наши данные.</p>
