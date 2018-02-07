@@ -98,7 +98,7 @@
     <link href="http://confar.github.io/blog/2017/11/13/django-auth-app/"/>
     <id>http://confar.github.io/blog/2017/11/13/django-auth-app/</id>
     <published>2017-11-13T12:13:04.000Z</published>
-    <updated>2017-11-22T20:49:39.138Z</updated>
+    <updated>2017-11-22T20:49:39.137Z</updated>
     
     <content type="html"><![CDATA[<p>В этой части будем реализовывать механизм авторизации пользователей через страницы логина и регистрации на Django 1.11 c валидацией форм и возможностью logout. В статье приведен код для python3.</p>
 <h1 id="Создание-проекта"><a href="#Создание-проекта" class="headerlink" title="Создание проекта"></a>Создание проекта</h1><p>Для начала создадим проект myproject через консоль в нужной нам папке и перейдем в папку проекта. Внутри проекта создадим приложение джанго - registration</p>
