@@ -5,7 +5,7 @@
   <link href="/blog/atom.xml" rel="self"/>
   
   <link href="http://confar.github.io/blog/"/>
-  <updated>2017-11-22T20:49:37.827Z</updated>
+  <updated>2018-02-07T23:39:49.643Z</updated>
   <id>http://confar.github.io/blog/</id>
   
   <author>
@@ -14,6 +14,38 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Простой https server на localhost python</title>
+    <link href="http://confar.github.io/blog/2018/02/08/localhost/"/>
+    <id>http://confar.github.io/blog/2018/02/08/localhost/</id>
+    <published>2018-02-07T23:08:36.000Z</published>
+    <updated>2018-02-07T23:39:49.643Z</updated>
+    
+    <content type="html"><![CDATA[<p>Порой нужно развернуть собственный сервер, и важно чтобы он был secure, https. И сегодня мы рассмотрим как это делается, используя самоподписанные сертификаты. Для начала установите openssl с помощью менеджера пакетов, если он еще не установлен</p>
+<h1 id="Сенерируем-ключ-сервера"><a href="#Сенерируем-ключ-сервера" class="headerlink" title="Сенерируем ключ сервера"></a>Сенерируем ключ сервера</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ openssl genrsa -des3 -out server.key 1024</div></pre></td></tr></table></figure>
+<p>Вам будет предложено ввести пароль для вашего ключа. Введите, подтвердите и продолжите.</p>
+<h1 id="Создайте-свой-запрос-подписи-сертификата-CSR"><a href="#Создайте-свой-запрос-подписи-сертификата-CSR" class="headerlink" title="Создайте свой запрос подписи сертификата (CSR)"></a>Создайте свой запрос подписи сертификата (CSR)</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ openssl req -new -key server.key -out server.csr</div></pre></td></tr></table></figure>
+<p>Вам будет предложено ввести пароль для ключа. Введите тот, который вы создали с шага 1 выше. Затем вы можете принять значения по умолчанию для всех приглашений, которые вам представлены, за исключением Common Name. Это как раз и сделает расширенную проверку сертификатов валидной. Поскольку мы делаем локальную разработку, ваше Common name будет localhost.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Common Name (e.g. server FQDN or YOUR name) []:localhost</div></pre></td></tr></table></figure>
+<h1 id="Создайте-свой-сертификат"><a href="#Создайте-свой-сертификат" class="headerlink" title="Создайте свой сертификат."></a>Создайте свой сертификат.</h1><p>Наконец, нам нужно создать наш сертификат. Опять же, используйте свой пароль для ключа, указанный ранее.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ openssl x509 -req -days 1024 -<span class="keyword">in</span> server.csr -signkey server.key -out server.crt</div></pre></td></tr></table></figure>
+<h1 id="Сгенерировать-файл-pem"><a href="#Сгенерировать-файл-pem" class="headerlink" title="Сгенерировать файл pem"></a>Сгенерировать файл pem</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ cat server.crt server.key&gt; server.pem</div></pre></td></tr></table></figure>
+<p>Реализация сервера Python: </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/python</span></div><div class="line"></div><div class="line"><span class="keyword">import</span> BaseHTTPServer, SimpleHTTPServer</div><div class="line"><span class="keyword">import</span> ssl</div><div class="line"></div><div class="line">httpd = BaseHTTPServer.HTTPServer ((<span class="string">'localhost'</span>, <span class="number">4443</span>), SimpleHTTPServer.SimpleHTTPRequestHandler)</div><div class="line">httpd.socket = ssl.wrap_socket (httpd.socket, certfile = <span class="string">'/ path / to / server.pem'</span>, server_side = <span class="keyword">True</span>)</div><div class="line">httpd.serve_forever ()</div></pre></td></tr></table></figure>
+<p>Запустить $ python server.py</p>
+<p>Хост по умолчанию здесь - localhost, а порт - 4443.</p>
+<p>Отлично! Мы развернули сервер https. Перейдем в <a href="https://localhost:4443" target="_blank" rel="external">https://localhost:4443</a> и нажмем «Дополнительно»&gt; «Перейти» на «localhost» (небезопасно), чтобы принимать сертификаты и просматривать файлы сервера</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Порой нужно развернуть собственный сервер, и важно чтобы он был secure, https. И сегодня мы рассмотрим как это делается, используя самопо
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>Аналитический обзор технологии NLP</title>
