@@ -5,7 +5,7 @@
   <link href="/blog/atom.xml" rel="self"/>
   
   <link href="http://confar.github.io/blog/"/>
-  <updated>2018-02-07T23:39:49.643Z</updated>
+  <updated>2018-02-07T23:39:49.000Z</updated>
   <id>http://confar.github.io/blog/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://confar.github.io/blog/2018/02/08/localhost/"/>
     <id>http://confar.github.io/blog/2018/02/08/localhost/</id>
     <published>2018-02-07T23:08:36.000Z</published>
-    <updated>2018-02-07T23:39:49.643Z</updated>
+    <updated>2018-02-07T23:39:49.000Z</updated>
     
     <content type="html"><![CDATA[<p>Порой нужно развернуть собственный сервер, и важно чтобы он был secure, https. И сегодня мы рассмотрим как это делается, используя самоподписанные сертификаты. Для начала установите openssl с помощью менеджера пакетов, если он еще не установлен</p>
 <h1 id="Сенерируем-ключ-сервера"><a href="#Сенерируем-ключ-сервера" class="headerlink" title="Сенерируем ключ сервера"></a>Сенерируем ключ сервера</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ openssl genrsa -des3 -out server.key 1024</div></pre></td></tr></table></figure>
@@ -52,7 +52,7 @@
     <link href="http://confar.github.io/blog/2017/11/20/nlp-tech-report/"/>
     <id>http://confar.github.io/blog/2017/11/20/nlp-tech-report/</id>
     <published>2017-11-20T16:12:01.000Z</published>
-    <updated>2017-11-22T20:49:37.827Z</updated>
+    <updated>2017-11-22T20:49:37.000Z</updated>
     
     <content type="html"><![CDATA[<p>Как-то меня попросили сделать обзор применения технологии обработки естественного языка или Natural Language Processing на английском. Ни в коем случае не путать с нейро-лингвистическим программированием, о котором так любят говорит коучи и прочие self-help гуру. Переводить на русский не буду, поэтому вывешу сюда как есть, может быть кому-то пригодится=)</p>
 <h1 id="Natural-language-processing-as-a-service"><a href="#Natural-language-processing-as-a-service" class="headerlink" title="Natural language processing as a service"></a>Natural language processing as a service</h1><p>Natural language processing is a field at the intersection of computer science, artificial intelligence and linguistics.<br>The goal for computers is to process or “understand” natural language in order to perform tasks that are useful, for example performing tasks, like making appointments or buying things.<br>The alternate usage is question answering and human-to-machine communations (Siri, Google Assistant, Facebook M, Cortana).</p>
@@ -130,7 +130,7 @@
     <link href="http://confar.github.io/blog/2017/11/13/django-auth-app/"/>
     <id>http://confar.github.io/blog/2017/11/13/django-auth-app/</id>
     <published>2017-11-13T12:13:04.000Z</published>
-    <updated>2017-11-22T20:49:39.137Z</updated>
+    <updated>2017-11-22T20:49:39.000Z</updated>
     
     <content type="html"><![CDATA[<p>В этой части будем реализовывать механизм авторизации пользователей через страницы логина и регистрации на Django 1.11 c валидацией форм и возможностью logout. В статье приведен код для python3.</p>
 <h1 id="Создание-проекта"><a href="#Создание-проекта" class="headerlink" title="Создание проекта"></a>Создание проекта</h1><p>Для начала создадим проект myproject через консоль в нужной нам папке и перейдем в папку проекта. Внутри проекта создадим приложение джанго - registration</p>
@@ -201,7 +201,7 @@
     <link href="http://confar.github.io/blog/2017/11/07/web-scraping/"/>
     <id>http://confar.github.io/blog/2017/11/07/web-scraping/</id>
     <published>2017-11-07T11:35:12.000Z</published>
-    <updated>2017-11-22T20:49:40.245Z</updated>
+    <updated>2017-11-22T20:49:40.000Z</updated>
     
     <content type="html"><![CDATA[<p>Сегодня поговорим о веб скрапинге. Допустим, стоит задача выгрузить информацию с сайта или нескольких и представить ее в таблице. Для примера я возьму techcrunch и mashable. На выходе хочу получить таблицу с колонками [текст], [краткое описание], [ссылка], чтобы не тратить время на бесконечное зависание на сайтах, ну вы знаете как это бывает=)</p>
 <h1 id="Библиотеки"><a href="#Библиотеки" class="headerlink" title="Библиотеки"></a>Библиотеки</h1><p>Начнем с импорта. Для работы с http лучший выбор это requests, а для парсинга html будем классически работать с Beautiful Soup. Ну и pandas для удобной работы с данными и выгрузки в csv.</p>
@@ -263,7 +263,7 @@
     <link href="http://confar.github.io/blog/2017/11/01/hello-world/"/>
     <id>http://confar.github.io/blog/2017/11/01/hello-world/</id>
     <published>2017-11-01T11:35:12.000Z</published>
-    <updated>2017-11-22T20:49:41.134Z</updated>
+    <updated>2017-11-22T20:49:41.000Z</updated>
     
     <content type="html"><![CDATA[<p>Решил поднять сайт. Тут будут различные заметки про программирование и аналитику.</p>
 <script src="//gist.github.com/e1729db6e87fa95ef2d2c44c303e748f.js"></script>
