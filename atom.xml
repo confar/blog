@@ -5,7 +5,7 @@
   <link href="/blog/atom.xml" rel="self"/>
   
   <link href="http://confar.github.io/blog/"/>
-  <updated>2018-02-07T23:39:49.000Z</updated>
+  <updated>2018-04-22T21:01:59.999Z</updated>
   <id>http://confar.github.io/blog/</id>
   
   <author>
@@ -14,6 +14,55 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Замена mysql на postgresql</title>
+    <link href="http://confar.github.io/blog/2018/04/22/mysql-postgresql/"/>
+    <id>http://confar.github.io/blog/2018/04/22/mysql-postgresql/</id>
+    <published>2018-04-22T20:53:38.000Z</published>
+    <updated>2018-04-22T21:01:59.999Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="На-примере-базы-сдвора-разбираем-процесс-перехода-с-mysql-на-postgresql"><a href="#На-примере-базы-сдвора-разбираем-процесс-перехода-с-mysql-на-postgresql" class="headerlink" title="На примере базы сдвора разбираем процесс перехода с mysql на postgresql"></a>На примере базы сдвора разбираем процесс перехода с mysql на postgresql</h1><ul>
+<li><p>создаем базу на постгрес</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sudo -u postgres psql</div><div class="line">create database pgdatabasename;</div></pre></td></tr></table></figure>
+</li>
+<li><p>делаем виртуальное окружение для питона 2.7 и скачиваем утилиту py-mysql2pgsql</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">virtualenv -p $(which python2.7) --no-site-packages ~/envs/py-mysql2pgsql</div><div class="line">source ~/envs/py-mysql2pgsql/bin/activate</div><div class="line">pip install py-mysql2pgsql</div></pre></td></tr></table></figure>
+</li>
+<li><p>запускаем</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">py-mysql2pgsql -v</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>В консоли видим ошибку, что конфига нет. Все верно, мы создали его этой командой.<br>Открываем для правки любым текстовым редактором.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vi mysql2pgsql.yml</div></pre></td></tr></table></figure></p>
+<p>оставляем структуру как есть, правим часть с базами<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">mysql:</div><div class="line">hostname: хост mysql, лучше сдампить и перевести на локалхост</div><div class="line">port: 3306</div><div class="line">socket: оставляем пустым</div><div class="line">username: mysqluser</div><div class="line">password: mysqlpass</div><div class="line">database: mysqldatabasename</div><div class="line">compress: false</div><div class="line">destination:</div><div class="line">file: оставляем пустым - если указать, будет записывать в файл</div><div class="line">postgres:</div><div class="line">hostname: localhost</div><div class="line">port: 5432</div><div class="line">username: pguser</div><div class="line">password: pgpass</div><div class="line">database: pgdatabasename</div></pre></td></tr></table></figure></p>
+<ul>
+<li>правим файл библиотеки утилиты (нужно чтобы не наткнуться на ошибку с переводом дат)<br>\mysql2pgsql\lib\postgres_writer.py строка 72</li>
+</ul>
+<p>меняем<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">elif column[&apos;type&apos;] == &apos;datetime&apos;:</div></pre></td></tr></table></figure></p>
+<p>на<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">elif column[&apos;type&apos;] == &apos;datetime&apos; or column[&apos;type&apos;].startswith(&apos;datetime(&apos;):</div></pre></td></tr></table></figure></p>
+<ul>
+<li>запускаем утилиту еще раз<br>py-mysql2pgsql -v</li>
+</ul>
+<p>натыкаемся на ошибку enum в базе shops</p>
+<p>Правим колонки в mysql, заменяем enum на varchar<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">ALTER TABLE shops ADD new_type_address ENUM(&apos;magazin&apos;, &apos;rc&apos;, &apos;otdelprodazh&apos;, &apos;dist-point&apos;)  DEFAULT &apos;magazin&apos; NULL;</div><div class="line">UPDATE shops SET new_type_address = type_address;</div><div class="line">ALTER TABLE shops DROP type_address;</div><div class="line">ALTER TABLE shops CHANGE new_type_address type_address VARCHAR(55) NULL;</div><div class="line"></div><div class="line"></div><div class="line">ALTER TABLE shops ADD new_type_company ENUM (&apos;sdvor&apos;, &apos;teplocentr&apos;) DEFAULT &apos;sdvor&apos; NOT NULL;</div><div class="line">UPDATE shops SET new_type_company = type_company;</div><div class="line">ALTER TABLE shops DROP type_company;</div><div class="line">ALTER TABLE shops CHANGE new_type_company type_company VARCHAR(55) NOT NULL;</div></pre></td></tr></table></figure></p>
+<p>Запускаем скрипт снова, базу можно не дропать</p>
+<p>в процессе можно наткнуться на такую ошибку<br>psycopg2.IntegrityError: insert or update on table “cart_items” violates foreign key constraint “cart_items_cart_id_fkey”<br>DETAIL:  Key (cart_id)=(226567) is not present in table “cart”.</p>
+<p>и как аналог<br>psycopg2.IntegrityError: insert or update on table “orders_pickups” violates foreign key constraint “orders_pickups_order_id_fkey”<br>DETAIL:  Key (order_id)=(49595) is not present in table “orders”.</p>
+<p>Ошибка говорит о том, что заказа, на который ссылается самовывоз, не существует. Нам такие записи в базе не нужны (по причине того, что связаны с уже неактуальным заказом) и  в этом случае удаляем строку с соответствующим key_id из таблицы cart_items или другой, по аналогии.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">DELETE ci FROM cart_items ci LEFT outer join cart c on c.id = ci.cart_id</div><div class="line">where c.id is NULL</div><div class="line"></div><div class="line">DELETE opk FROM orders_pickups opk LEFT outer join orders o on o.id = opk.order_id</div><div class="line">where o.id is NULL</div><div class="line"></div><div class="line">DELETE opr FROM orders_products opr LEFT outer join orders o on o.id = opr.order_id</div><div class="line">where o.id is NULL</div><div class="line"></div><div class="line">DELETE osh FROM orders_statuses_history osh LEFT outer join orders o on o.id = osh.order_id</div><div class="line">where o.id is NULL</div></pre></td></tr></table></figure></p>
+<ul>
+<li>Если все прошло успешно, то у нас есть готовая база постгреса.</li>
+</ul>
+<p>Меняем database ENGINE в сеттингах джанги на psycopg2, делаем makemigrations и migrate, сносим конфликтующие миграции (в случае сдвора были миграции orders и banners)</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;На-примере-базы-сдвора-разбираем-процесс-перехода-с-mysql-на-postgresql&quot;&gt;&lt;a href=&quot;#На-примере-базы-сдвора-разбираем-процесс-перехода
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>Простой https server на localhost python</title>
