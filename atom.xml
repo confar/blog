@@ -5,7 +5,7 @@
   <link href="/blog/atom.xml" rel="self"/>
   
   <link href="http://confar.github.io/blog/"/>
-  <updated>2018-04-22T21:01:59.999Z</updated>
+  <updated>2018-06-18T20:26:05.138Z</updated>
   <id>http://confar.github.io/blog/</id>
   
   <author>
@@ -14,6 +14,39 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Пробросить объект в форму Django</title>
+    <link href="http://confar.github.io/blog/2018/06/18/django-forms/"/>
+    <id>http://confar.github.io/blog/2018/06/18/django-forms/</id>
+    <published>2018-06-18T20:14:31.000Z</published>
+    <updated>2018-06-18T20:26:05.138Z</updated>
+    
+    <content type="html"><![CDATA[<p>Допустим, мы хотим профильтровать опции в инлайн форме в зависимости от инстанса объекта. И все это в админке. Для этого сначала можно пробросить его в keyword arguments формы, а затем получить оттуда</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">PageNodeAttachmentInline</span><span class="params">(admin.TabularInline)</span>:</span></div><div class="line">    model = PageNodeAttachment</div><div class="line">    form = PageNodeAttachmentForm</div><div class="line">    formset = PageNodeAttachmentInlineFormSet</div><div class="line">    extra = <span class="number">2</span></div><div class="line">    </div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">PageNodeAttachmentForm</span><span class="params">(forms.ModelForm)</span>:</span></div><div class="line">    node_id = forms.ChoiceField()</div><div class="line"></div><div class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Meta</span>:</span></div><div class="line">        model = PageNodeAttachment</div><div class="line">        fields = (<span class="string">'node_id'</span>, <span class="string">'page_type'</span>)</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, *args, **kwargs)</span>:</span></div><div class="line">        attachment_page = kwargs.pop(<span class="string">'attachment_page'</span>, <span class="keyword">None</span>)</div><div class="line">        super(PageNodeAttachmentForm, self).__init__(*args, **kwargs)</div><div class="line">        self.fields[<span class="string">'node_id'</span>].choices = get_nodes_for_page(attachment_page)</div><div class="line"></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">PageNodeAttachmentInlineFormSet</span><span class="params">(BaseInlineFormSet)</span>:</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, *args, **kwargs)</span>:</span></div><div class="line">        super(PageNodeAttachmentInlineFormSet, self).__init__(*args, **kwargs)</div><div class="line">        attachment_page = kwargs.get(<span class="string">'instance'</span>, <span class="keyword">None</span>)</div><div class="line">        <span class="keyword">if</span> attachment_page:</div><div class="line">            self.form_kwargs[<span class="string">'attachment_page'</span>] = attachment_page</div></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Допустим, мы хотим профильтровать опции в инлайн форме в зависимости от инстанса объекта. И все это в админке. Для этого сначала можно пр
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>packages</title>
+    <link href="http://confar.github.io/blog/2018/05/01/packages/"/>
+    <id>http://confar.github.io/blog/2018/05/01/packages/</id>
+    <published>2018-05-01T13:35:14.000Z</published>
+    <updated>2018-05-01T13:35:14.392Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>Замена mysql на postgresql</title>
