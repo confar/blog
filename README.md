@@ -1,2 +1,2 @@
 # Blog
-Blog about programming
+Blog about python programming
